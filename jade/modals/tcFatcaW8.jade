@@ -1,0 +1,53 @@
+ion-modal-view
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changeAddress.crs.w8.tc.title')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl
+        h3(translate='transactions.changeAddress.crs.w8.tc.crs_title')
+
+        ul.list-numeral
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.crs_para1')
+          ul.list-alpha
+            li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.crs_para1a')
+            li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.crs_para1b')
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.crs_para2')
+          li.margin-bottom-large(translate='transactions.changeAddress.crs.w8.tc.crs_para3')
+
+        h3(translate='transactions.changeAddress.crs.w8.tc.title2')
+        
+        p.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para1')
+        ul.list-numeral
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para2')
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para3')
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para4')
+          ul.list-alpha
+            li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para4a')
+            li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para4b')
+            li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para4c')
+          li.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.w8_para5')
+          li.margin-bottom-large(translate='transactions.changeAddress.crs.w8.tc.w8_para6')
+
+        h3(translate='transactions.changeAddress.crs.w8.tc.title3')
+        p.margin-bottom-medium(translate='transactions.changeAddress.crs.w8.tc.privacy')
+        
+        p.margin-bottom-medium(translate='transactions.changeAddress.crs.fatcaW9.tc.note')
+
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx1', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.crs.w8.tc.us_decla_para12')
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx2', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.crs.w8.tc.us_decla_para13w8')
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx3', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.crs.w8.tc.us_decla_para14')
+
+
+
+      

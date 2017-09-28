@@ -1,0 +1,18 @@
+ion-modal-view.general-modal.cancelAutoDebitModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.fs.modal.title')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium
+        span.pol-value(translate='transactions.fs.modal.confirmationMsg')
+
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-wide.button-major(ng-click='no()', translate='transactions.fs.modal.no')
+      .col-10
+      .col-33
+        button.button.button-major.button-wide(ng-click='yes()', translate='transactions.fs.modal.yes')
+      .col-10

@@ -1,0 +1,17 @@
+ion-modal-view.general-modal.cancelDirectCreditModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.dc.step3.cancel_header')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium.status-message
+        span.pol-value(translate='transactions.dc.step3.cancel_msg')
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-wide.button-major(ng-click='no()', translate='transactions.dc.step3.cancel_no')
+      .col-10
+      .col-33
+        button.button.button-major.button-wide(ng-click='yes()', translate='transactions.dc.step3.cancel_yes')
+      .col-10

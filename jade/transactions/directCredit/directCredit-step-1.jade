@@ -1,0 +1,57 @@
+#step1(ng-if='steps===1')
+  .center.margin-bottom-xl
+    h2(translate='transactions.dc.step1.title')
+
+  include top-row
+  
+  .row
+    .col-90.center-block
+      form(name='thisForm')
+        h3(translate='transactions.dc.step1.form_title')
+        .row.margin-bottom-large
+          .col-50.padding-right-medium
+            span.pol-value(translate='transactions.dc.step1.bank_name')
+            label.item.item-input.selectArrow.input-margin(ng-class="{'form-error-input':thisForm.bankName.$dirty && !thisForm.bankName.$valid}")
+              select(name='bankName', ng-model='data.bankInfo' ng-options='bank as bank.bankName for bank in viewData.bankCodes', required)
+                option(value='', translate='transactions.dc.step1.select_txt')
+            
+            .error-container(ng-messages='thisForm.bankName.$error', ng-if="thisForm.bankName.$dirty && !thisForm.bankName.$valid")
+              small.error(ng-message='required', translate='transactions.dc.step1.err_bank_name')
+
+          .col-50.padding-right-medium
+            span.pol-value(translate='transactions.dc.step1.bank_account_no')
+            label.item.item-input.input-margin(ng-class="{'form-error-input':thisForm.accountNo.$dirty && !thisForm.accountNo.$valid, 'disabledItem': !data.accountType}")
+              input(name='accountNo', type='tel', ng-model='data.accountNo', maxlength='{{data.bankInfo[data.accountType]}}' minlength='{{data.bankInfo[data.accountType]}}', required, ng-disabled='!data.accountType')
+            
+            .error-container(ng-messages='thisForm.accountNo.$error', ng-if="thisForm.accountNo.$dirty")
+              small.error(ng-message='required', translate='transactions.dc.step1.err_bank_account_no')
+        
+        .row.margin-bottom-large
+          .col-50.padding-right-medium
+            span.pol-value(translate='transactions.dc.step1.account_type')
+            .row.margin-top-small
+              .col-50
+                label.radio-button
+                  input(type='radio', name='accountType' ng-model='data.accountType', value="saAcctDigit") 
+                  span.indicator
+                  span(translate='transactions.dc.step1.savings')
+              .col-50
+                label.radio-button
+                  input(type='radio', name='accountType' ng-model='data.accountType', value="curAcctDigit") 
+                  span.indicator
+                  span(translate='transactions.dc.step1.current')
+          //- .col-50
+          //-   span.pol-value(translate='transactions.dc.step1.identification_type')
+          //-   .row.margin-top-small.margin-bottom-small
+          //-     .col-50
+          //-       label.radio-button
+          //-         input(type='radio', name='idType' ng-model='data.idType', ng-value="'03'", required) 
+          //-         span.indicator
+          //-         span(translate='transactions.dc.step1.newnric')
+          //-     .col-50
+          //-       label.radio-button
+          //-         input(type='radio', name='idType' ng-model='data.idType', ng-value="'04'", required) 
+          //-         span.indicator
+          //-         span(translate='transactions.dc.step1.oldic')
+        button.center-block.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.dc.next', ng-disabled='thisForm.$invalid')
+                      

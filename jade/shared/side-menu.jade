@@ -1,0 +1,29 @@
+ion-side-menus(delegate-handle='searchMenuDelegate')
+  //- left side menu
+  ion-side-menu(side='left')
+    ion-header-bar.bar-positive(align-title='left')
+      h1.title Left
+    ion-content.has-header.side-menu
+      ion-list
+        ion-item(menu-close='', href='#/resetPassword')
+          .row
+            .col-25(style='margin: auto')
+              img.transaction-icon(src='img/key.svg')
+            .col-75(style='margin: auto')
+              span(translate="{{'policySerach.change_password' | translate}}")
+        ion-item(menu-close='', href='#/transactionHistory', style='margin-top: -5px')
+          .row
+            .col-25(style='margin: auto')
+              img.transaction-icon(src='img/clock.svg')
+            .col-75(style='margin: auto')
+              span(translate="{{'policySerach.trans_history' | translate}}")
+
+    ion-footer-bar.side-menu
+      ion-item.list(nav-clear='', menu-close='', href='#', style='left:0;right:0;margin:0; width: 100%;position: fixed;') V 0.5.X
+
+  //- main content
+  ion-side-menu-content
+    ion-nav-bar
+      ion-nav-buttons(side='left')
+        button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
+    div(ng-include='contentTemplate')

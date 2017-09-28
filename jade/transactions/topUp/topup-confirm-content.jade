@@ -1,0 +1,44 @@
+.row
+  .col-90.center-block
+    .row
+      .col-50
+        h3(translate='transactions.topup.fund_details')
+        .row
+          .col
+            .item-container
+              .pol-value(translate='transactions.topup.plan_name')
+              .pol-property {{data.policyInfo.planName}}
+        .row
+          .col
+            .item-container
+              .pol-value(translate='takaful.policy_no', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+              .pol-value(translate='transactions.topup.policy_no', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+              .pol-property {{data.policyInfo.policyNo}}
+        .row
+          .col
+            .item-container
+              .pol-value(translate='transactions.topup.insured_name')
+              .pol-property {{data.policyInfo.insuredName}}
+        .row
+          .col
+            .item-container
+              .pol-value(translate='transactions.topup.premium_amount', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+              .pol-value(translate='takaful.policy_due_amount', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+              .pol-property {{data.policyInfo.premiumAmount}}
+              
+      .col-50
+        .row
+          .col
+            h3(translate='transactions.topup.fund_allocation')
+            .row.table-header2
+              .col-67
+                span(translate='transactions.topup.fund_name')
+              .col-33
+                span.pull-right(translate='transactions.topup.allocation')
+            .row.topup-scroll
+              ion-content
+                .row.table-row2(ng-repeat='item in data.fundAllocation')
+                  .col-67
+                    span {{item.typeOfFund}}
+                  .col-33
+                    span {{item.allocationPercent}}

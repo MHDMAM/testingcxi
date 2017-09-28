@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>medical card</title>
+
+</head>
+
+<body>
+
+<table>
+  <tr>
+    <td>
+    <p>Dear<strong><%= ownerName %></strong>,</p>
+    <br>
+    <p>We have received your request <strong><%= transactionType %></strong> for the policy/certificate and covered member below on <strong><%= dateTime %></strong>.  Your request will be processed and the new card will be delivered to you within 10 working days.
+    </p>
+
+    <br>
+    <p>Policy/Certificate Number</p>
+    <p><strong><%= policyNo %></strong></p>
+
+    <br>
+
+    <p>Delivery address: </p>
+    <p><strong><%= address1 %><br>
+    <%= address2 %><br>
+    <%= address3 %><br>
+    <%= postcode %><br>
+    <%= state %>
+    </strong>
+    </p>
+
+    <p>If you have any questions, please contact our Care Line at 1300 88 1899. Our office hours are:</p>
+
+    <p>Monday to Thursday 8.30am - 5.30pm</p>
+    <p>Friday 8.30am - 4.30pm</p>
+
+    <br>
+
+    <p>Thank you.</p>
+    <p>Yours sincerely
+    <br>AIA Bhd/AIA Public Takaful</p>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0",
+  "name": "aia-cordova-plugin",
+  "cordova_name": "AIA plugin",
+  "description": "",
+  "license": "MIT",
+  "platforms": [
+    "ios"
+  ],
+  "engines": [{
+    "name": "cordova",
+    "version": ">=3.0.0"
+  }]
+}

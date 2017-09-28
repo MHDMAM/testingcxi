@@ -1,0 +1,15 @@
+ion-modal-view.docs-preview
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.medicalExam.header')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content(scroll="false")
+    .content(style="height: calc(100% - 87px);")
+      .center-block.preview-container
+        img(ng-src='{{previewPicModal.pic}}')
+
+  .row.padding-medium(style='position: fixed;bottom: 0')
+    .col-50
+      div.button.button-major.button-clear.button-stable(ng-click='deletePic()')
+        span.padding-right-xxs(translate='transactions.fs.remove')
+        span.ion-trash-a

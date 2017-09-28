@@ -1,0 +1,48 @@
+#step2.ng-enter(ng-if='steps===3')
+  .center.margin-bottom-xl
+    h2(translate='transactions.cancelAutoDebit.step3.edit')
+
+    .full-bleed.status-message.margin-bottom-xl
+      div.status-text-block.margin-bottom-medium
+        //- span.status-success(translate='transactions.changeAddress.step3.submit_success') 
+        span.status-success(ng-if='viewData.success === true') {{"transactions.changeAddress.submit_success" | translate}}
+        span.status-fail(ng-if='viewData.success === false') {{"transactions.changeAddress.submit_failed" | translate}}
+      span.pol-value(ng-if='viewData.success === true', translate='transactions.changeAddress.step3.confirmation')
+
+  .row
+    .col-90.center-block
+      .row.has-border-padding.margin-bottom-large
+        .col-50.padding-right-medium
+          .row
+            .col
+              .pol-value(translate='transactions.changePaymentCycle.insured_name')
+              .pol-property {{data.mainPolicyInfo.insuredName}}
+
+      .row.margin-bottom-large
+        .col
+          .row
+            .col-33
+              h3(translate='transactions.changePaymentCycle.policy_no')
+
+            .col-67.margin-bottom-small
+              h3 New "{{viewData.selectedFreq | duedatenumbertotext }}" Premium
+              span.negative-margin.pol-value Inclusive of GST - if any
+
+          .row.margin-bottom-small(ng-repeat='policy in data.policies')
+            .col-33     
+              .pol-value {{policy.policyNo}}
+
+            .col-67
+              .pol-value(ng-if="viewData.selectedFreq == '01' ") RM{{policy.annualPremWithGST}}
+              .pol-value(ng-if="viewData.selectedFreq == '02' ") RM{{policy.semiAnnualPremWithGST}}
+              .pol-value(ng-if="viewData.selectedFreq == '04' ") RM{{policy.quarterlyPremWithGST}}
+              .pol-value(ng-if="viewData.selectedFreq == '12' ") RM{{policy.monthlyPremWithGST}}
+
+
+      .row
+        p Your next {{viewData.selectedFreq | duedatenumbertotext }} premium is due on {{data.policies[0].confirmNextPremiumDueDate}}.
+              
+  .center
+      
+    //- nav buttons
+    button.button.button-major.button-wide.margin-top-large(ng-click='close()', translate='transactions.cancelAutoDebit.back_to_dashboard')

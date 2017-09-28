@@ -1,0 +1,14 @@
+#step5.ng-enter(ng-if='steps===5', style='padding-top: 30px;')
+  .full-bleed.status-message.margin-bottom-medium(style='margin-bottom: 75px')
+    div.status-text-block.margin-bottom-xs
+      //- span.status-success(translate='transactions.changeAddress.step3.submit_success') 
+      span(translate="transactions.changeAddress.step3.transact_status")
+      span.status-success(ng-if='viewData.success === true', translate="transactions.fs.step5.submit_success")
+      span.status-fail(ng-if='viewData.success === false', translate="transactions.fs.step5.submit_failed")
+    span.pol-value(translate='transactions.changeAddress.step3.confirmation')
+
+  .row
+    .col-90.center-block
+      
+      //- main content
+      include fund-switching-confirm-content

@@ -1,0 +1,58 @@
+#step2.ng-enter(ng-if='steps===3')
+  .center.margin-bottom-large
+    h2(translate='payment.thanks.makePayment')
+    span.block(translate='payment.thanks.headerL2')
+
+  .row.payment-receipt-card
+    .col-80.center-block.pane-scroll
+      ion-content
+        .row.pol-row(ng-repeat='item in data.receipts')
+          .col-67
+            .policy-item-icon
+              svg.icon-s(role='img' title='lifepro-prime1')
+                use(xlink:href='img/icons.svg#lifepro-prime1')
+            h4.margin-bottom-xxs {{item.planName}}, {{item.lineOfBiz | lineofbiztotext}}
+
+            .item-container
+              span.pol-value(translate='takaful.policy_no', ng-if="item.lineOfBiz === 'LAFT'")
+              span.pol-value(translate='payment.thanks.policy_no', ng-if="item.lineOfBiz !== 'LAFT'")
+              span.pol-property2 {{item.policyNo}}
+
+              span.pol-value(translate='payment.thanks.receiptNo', ng-if="item.respCode === '0'", style='padding-left: 64px;')
+              span.pol-property2(style='padding-left: 64px;') {{item.receiptNo}}
+
+              //- span.pol-value.p-red-color(translate='payment.thanks.error', ng-if='item.respCode !== "0"')
+              span.pol-property2(ng-if='item.respCode !== "0"', style='padding-left: 64px;') {{item.respDesc}}
+
+          .col-33.pull-right.payment-col
+            //- .row.grand-total(ng-if='item.totalPremiumAmount || item.topUpAmount')
+            .row.grand-total(ng-if='item.total || item.topUpAmount')
+              .col-33 
+                span.font-normal(translate='payment.thanks.total')
+              .col-33
+                span RM
+              .col-33
+                //- span.pull-right(ng-hide='item.respCode !== "0"') {{(item.totalPremiumAmount + item.topUpAmount) | fix2}}
+                //- span.pull-right(ng-hide='item.respCode !== "0"') {{(item.actions.total) | fix2}}
+                span.pull-right(ng-hide='item.respCode !== "0"') {{item.total | aiadecimal}}
+                span.pull-right(ng-show='item.respCode !== "0"') N/A
+            
+   .row.grand-total-block
+    .col-80.center-block
+      .row
+        .col-67
+        .col-33
+          .row.grand-total
+            .col-33
+              h4(translate='payment.thanks.grand_total')
+            .col-33
+              span RM
+            .col-33
+              span {{data.grandTotal | aiadecimal}}
+  
+  //- h3.center(translate='payment.thanks.headerL3')
+
+  .row
+    .col
+      button.center-block.button.button-major.button-wide(ng-click='finishPayment()', translate='payment.thanks.next')
+

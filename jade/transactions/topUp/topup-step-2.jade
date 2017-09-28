@@ -1,0 +1,72 @@
+#step2(ng-if='steps===2')
+  .center.margin-bottom-xl
+    div(ng-switch='viewData.topUpMode')
+      h2(translate='transactions.topup.tilte_step2')
+    
+  form(name='step2Form')
+    .row(ng-show='viewData.topUpMode!==null && data.premiumVal')
+      .col-90.center-block
+        .row.table-header2 
+          .col-33
+            span(translate='transactions.topup.fund_name')
+          .col-33
+            span.width-75(translate='transactions.topup.fund_value')
+          .col-33
+            span(translate='transactions.topup.allocation')
+        .row
+          hr
+        .row.topup-scroll
+          ion-content
+            .row.fund-row.topup-scroll-row(ng-repeat='item in data.fundAllocation', ng-class="{'full-bleed': item.highlight}")
+              .col-33
+                label.item.item-input.selectArrow(ng-class="{'disabledItem': !item.isEnabled}")
+                  select.formInput(ng-change='onChangeFund($index)', ng-model='data.fundAllocation[$index]', ng-options='fund as fund.typeOfFund for fund in data.fundDetails', ng-if='viewData.allocationType == 2', ng-disabled='!item.isEnabled')
+                  select.formInput(ng-change='onChangeFund($index)', ng-model='data.fundAllocation[$index]', ng-options='fund as fund.typeOfFund for fund in data.fundAllocation', ng-if='viewData.allocationType == 1', ng-disabled='!item.isEnabled')
+                    option(value='')
+
+              .col-33
+                span.span-vertical-center.width-75 {{item.valueOfUnits}}
+              .col-33
+                .col
+                  .row
+                    .col-25
+                      label.item.item-input(ng-class="{'disabledItem': !item.isEnabled}", style='width: 80px;')
+                        input(type='number', min='0', max='100', ng-model='item.allocationPercent', ng-change='updateAllocation($index)' ng-disabled='!item.isEnabled', ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }")
+
+                    .col-75
+                      .row
+                        .col-50(ng-if='viewData.allocationType == 2')
+                          span.span-vertical-center.padding-left-xxs
+                          div.pull-right.major-link.blue(ng-click='editAllocation($index)')
+                            span.span-vertical-center(translate='transactions.topup.edit')
+                            //- span.span-vertical-center.ion-arrow-right-b
+                            span.span-vertical-center.ion-edit
+                        .col-33(ng-if='viewData.allocationType == 2')
+                          span.span-vertical-center.padding-left-xxs
+                          div.pull-right.major-link.stable(ng-click='removeAllocation($index)')
+                            span.span-vertical-center(translate='transactions.topup.remove')
+                            span.span-vertical-center.ion-android-close
+        .clearfix
+        .row(ng-if='viewData.allocationType===2')
+          .col
+            div.major-link.blue(ng-click='addFund()', ng-show='data.fundAllocation.length < 10')
+              span(translate='transactions.topup.add_fund')
+              //- span.ion-arrow-right-b
+              span.ion-plus
+
+
+
+        //- tnc agreet checkbox
+        .checkbox-display-with-terms
+          div.agree-checkbox.margin-top-medium.margin-bottom-medium
+            li.item.item-checkbox
+              label.checkbox
+                input(type='checkbox', name='tnc', ng-model='viewData.tncChecked', required)
+              span {{'transactions.medcard_replacement.read_tnc1' | translate}}&nbsp;
+            span.inline-link(translate='transactions.medcard_replacement.read_tnc2', ng-click='termsNconditions()') 
+            
+
+    .center
+      button.button.button-calm.button-wide.button-major(ng-click='updateState(3)', translate='transactions.topup.pay_later', ng-if='viewData.topUpMode === 0')
+
+      button.button.button-major.button-wide(ng-click='payment()', translate='transactions.topup.to_payment', ng-disabled='!viewData.tncChecked || !viewData.fundTotal100')

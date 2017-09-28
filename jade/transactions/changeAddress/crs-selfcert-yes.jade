@@ -1,0 +1,88 @@
+#crsSelfCertYes(ng-if='steps === "crsYes"')
+  //- .center.margin-bottom-xl
+  //-   h2(translate='transactions.changeAddress.crs.h1')
+  //-   span.block(translate='transactions.changeAddress.crs.h2')
+
+  //- customer details
+  .row
+    .col-90.center-block
+      .row.has-border-padding.margin-bottom-large
+        .col-25.padding-right-medium
+          .row
+            .col
+              .pol-value(translate='transactions.changeAddress.crs.account_holder_name')
+              .pol-property {{data.policyOwnerInfo.name}}
+        .col-25.padding-right-medium
+          .row
+            .col
+              .pol-value(translate='transactions.changeAddress.crs.policy_no')
+              .pol-property {{data.policyOwnerInfo.policyNo}}
+
+        h3.margin-top-medium.margin-bottom-xxs(translate='transactions.changeAddress.crs.title')
+      
+      //- main content
+      //- .row.topup-scroll.fund-step-height2.margin-top-medium
+      //-   ion-content
+      .row.has-border-padding.margin-bottom-large(ng-repeat='item in crs.yes.crsList')
+        .col
+          .row
+            //- residence country
+            .col-40.padding-right-medium
+              span.pol-value(translate='transactions.changeAddress.crs.yes.residence_country')
+              label.item.item-input.selectArrow
+                select(name='country_{{$index}}', ng-model='item.country', ng-options='crscountry as crscountry.country for crscountry in viewData.crscountries', required)
+                 option(value='')
+            
+            .col-40.padding-right-medium(ng-if='item.noTin')
+            .col-40.padding-right-medium(ng-if='!item.noTin')
+              span.pol-value(translate='transactions.changeAddress.crs.yes.tin_label')
+              label.item.item-input.input-margin
+                input.formInput(type='text', name ='crsTin', ng-model='item.tin', ng-required='!item.noTin', ng-disabled='item.noTin && !viewData.crscountries')
+              .error-container(ng-messages='thisForm.crsTin.$error')
+                small.err(ng-message='required', ng-if="thisForm.crsTin.$dirty", translate='transactions.changeAddress.crs.yes.tin_required')
+                  pre(translate='transactions.changeAddress.crs.yes.tin') 
+            //- delete button
+            .col-20.padding-right-medium
+              div.pull-right.major-link.stable(ng-click='removeCrsItem($index)', ng-show='crs.yes.crsList.length > 1')
+                span.span-vertical-center.padding-left-xxs(translate='transactions.changeAddress.crs.yes.remove_tin')
+                span.span-vertical-center.ion-trash-a        
+
+            //- the check box
+            .row
+              label.checkbox
+                input(type='checkbox', ng-model='item.noTin', ng-disabled='item.tin')
+              span.col-value(translate='transactions.changeAddress.crs.yes.me_no_tin', style='margin-top: 10px')
+    
+            .row(ng-show='item.noTin')
+              .col.padding-top-xs
+                span.pol-value.col-value(translate='transactions.changeAddress.crs.select_reason', style='margin-bottom: 12px;')
+                  //- A
+                .row(ng-show='showReasonA()')
+                  label.checkbox
+                    input(type='radio', name='tinReason_{{$index}}', ng-model='item.tinreason', value='A', required)
+                    span.indicator
+                  span.col-value(translate='transactions.changeAddress.crs.yes.reason1', style='margin-top: 10px')
+                  //- B
+                .row.margin-bottom-medium(ng-show='!showReasonA(false)')
+                  .col
+                    label.radio-button
+                      input(type='radio', name='tinReason_{{$index}}', ng-model='item.tinreason', value='B', required)
+                      span.indicator
+                      span(translate='transactions.changeAddress.crs.yes.reason2_title')
+                      label.item.item-input.input-margin
+                        textarea(placeholder="{{'transactions.changeAddress.crs.yes.reason2_text' | translate }}", ng-model='item.othersReason', ng-required='item.reason === 2', rows=5)
+                  //- C
+                .row.margin-bottom-medium(ng-show="item.country.key ==='AUS'")
+                  .col
+                    label.radio-button
+                      input(type='radio', name='tinReason_{{$index}}', ng-model='item.tinreason', value='C', required)
+                      span.indicator
+                      span(translate='transactions.changeAddress.crs.yes.reason3')
+
+      //- add button
+      .row
+        .col
+          span.span-vertical-center.padding-left-xxs
+          div.pull-left.major-link.blue(ng-click='addCrsItem()', ng-show='crs.yes.crsList.length < 5')
+            span.span-vertical-center(translate='transactions.changeAddress.crs.yes.add_tin')
+            span.span-vertical-center.ion-plus

@@ -1,0 +1,29 @@
+ion-modal-view.general-modal.cancelAutoDebitModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changeAddress.crs.w8.foreign_tin')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium
+        span.pol-value(translate='transactions.changeAddress.crs.w8.tin_number')
+
+    .row.margin-bottom-large.has-border-padding
+      .col
+        span.pol-value(translate='transactions.changeAddress.crs.w8.ssn_tin_title')
+        label.item.item-input.input-margin
+          input(type='text', ng-model='crs.w8.tin', ng-disabled='crs.w8.notin', required)
+    .row.margin-bottom-large.has-border-padding
+      label.checkbox
+        input(type='checkbox', ng-model='crs.w8.noTin', ng-disabled='crs.w8.tin && crs.w8.tin !== ""')
+      span.col-value(translate='transactions.changeAddress.crs.w8.no_ssn_tin')
+    .row.margin-bottom-large(ng-if='crs.w8.noTin')
+      .col
+        span.pol-value(translate='transactions.changeAddress.crs.w8.dob')
+        label.item.item-input.input-margin
+          input(type='date', ng-model='crs.w8.dob')
+
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-wide.button-major(ng-click='confirm()', translate='Confirm')

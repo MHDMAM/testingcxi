@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Receipt</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+    <style type="text/css">
+      body{width:21cm;height:29.7cm;font-family:arial;color:#241e20;font-size:11px;position:relative;background:#fff}p, span{font-size: 11px;}*{padding:0;margin:0}.col-50{width:50%}.italic{font-style:italic}.details-table th{border-bottom:solid 3px #ddd;padding-bottom:12px;text-align:right;padding-right:10px}.details-table td{padding:20px 10px;border-bottom:solid 1px #ddd;text-align:right}.container-outer{padding:15mm;position:relative}.logo{width:170px;height:80px;margin-bottom:65px}.address-block{font-weight:700;font-size:14px;padding-right:24px}.address-block *{margin-bottom:2px}.text1{font-size:18px}.text2{font-size:12px}.text3{font-size:20px;font-weight:700}.address-block2{padding-right:30px;margin-bottom:8px}.address-block2 *{margin-bottom:2px}.rcpt-no{margin-top:20px}.details-table{margin-top:50px}.summary-table{width:100%;padding:10px}.summary-table td{padding:7px}.notice-block{position:absolute;bottom:15mm;width:100%}.notice-block table{padding:9px;border:1px solid #333;margin:0 15mm}.notice-block h4{margin-bottom:12px}.notice-block ul{padding-left:12px;font-size:10px}.notice-block ul li{margin-bottom:4px}.align-left{text-align:left!important}
+    </style>
+</head>
+
+<body>
+    <div class="container-outer">
+        <table cellspacing="0" class="container-main">
+            <tr>
+                <td cellpadding="0" cellspacing="0" valign="top" class="col-50">
+                    <div class="logo">
+                        <?xml version="1.0" encoding="utf-8"?>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 48"><path fill="#D42150" d="M87.1 13.3c-.8 0-1.4-.1-2-.3.7-2 1.4-3.8 1.4-4 .2-.5.3-.7.6-.7.2 0 .4.2.6.7.1.2.7 2 1.5 4-.7.2-1.3.3-2.1.3m2.6-5.8c-.6-1.2-1.4-1.7-2.5-1.7H87c-1.1 0-1.9.5-2.5 1.7-.8 1.7-4.4 11.3-4.4 11.3h3s.5-1.5 1.2-3.3c.9.2 1.9.3 2.9.3s2-.1 2.9-.3c.7 1.8 1.2 3.4 1.2 3.4h2.9c0-.1-3.7-9.7-4.5-11.4M67 13.3c-.8 0-1.4-.1-2-.3.7-2 1.4-3.8 1.4-4 .2-.5.3-.7.6-.7.2 0 .4.2.6.7.1.2.7 2 1.5 4-.7.2-1.3.3-2.1.3m.1-7.5h-.2c-1.1 0-1.9.5-2.5 1.7-.8 1.7-4.4 11.3-4.4 11.3h2.9s.5-1.5 1.2-3.3c.9.2 1.9.3 2.9.3s2-.1 2.9-.3c.7 1.8 1.2 3.4 1.2 3.4H74s-3.7-9.6-4.5-11.3c-.5-1.3-1.3-1.8-2.4-1.8m8.5 13h2.8V5.9h-2.8v12.9zM99.8 6c.5 0 1.1-.1 1.7-.1h1.7c.6 0 1.2.1 1.8.2.6.1 1.2.3 1.7.7.5.3.9.8 1.2 1.4.3.6.5 1.3.5 2.3 0 .9-.2 1.7-.5 2.2-.3.6-.7 1-1.2 1.4-.5.3-1 .6-1.6.7-.6.1-1.2.2-1.8.2h-.8v4.1c-.2 0-.4.1-.7.1h-1.2c-.2 0-.5 0-.7-.1V6zm2.6 6.6h.9c.3 0 .6 0 .9-.1.3-.1.5-.2.8-.4.2-.2.4-.4.5-.7.1-.3.2-.7.2-1.1 0-.4-.1-.8-.2-1.1-.1-.3-.3-.5-.5-.7-.2-.2-.5-.3-.8-.4-.3-.1-.6-.1-.9-.1h-.9v4.6zm7.7-6.5c.2 0 .4-.1.7-.1h1.3c.2 0 .4 0 .7.1v6.6c0 .7 0 1.3.1 1.9.1.5.2.9.3 1.3.2.3.4.6.7.7.3.2.7.2 1.1.2.5 0 .8-.1 1.1-.2.3-.2.5-.4.7-.7.2-.3.3-.8.3-1.3.1-.5.1-1.1.1-1.9V6.1c.2 0 .5-.1.7-.1h1.3c.2 0 .4 0 .7.1v7.2c0 .9-.1 1.7-.2 2.4s-.4 1.3-.8 1.8-.9.9-1.5 1.2c-.6.3-1.4.4-2.4.4s-1.7-.1-2.4-.4c-.6-.3-1.1-.7-1.5-1.2-.4-.5-.6-1.1-.8-1.8-.1-.7-.2-1.5-.2-2.4V6.1zm12.1 0c.4-.1.8-.1 1.3-.1s1.1-.1 1.9-.1c.7 0 1.3.1 1.9.2.6.1 1.1.3 1.5.5.4.3.8.6 1 1 .2.4.4 1 .4 1.6 0 .4-.1.7-.2 1.1-.1.3-.3.6-.5.9l-.6.6c-.2.2-.5.3-.7.3.3 0 .6.1.9.2.3.1.6.3.9.6.3.3.5.6.7 1 .2.4.3.9.3 1.5 0 .8-.1 1.4-.4 1.9-.3.5-.7.9-1.2 1.2-.5.3-1.1.5-1.7.6-.7.1-1.3.2-2 .2h-1.6c-.5 0-1.1-.1-1.8-.2v-13zm3.4 5.2c.3 0 .6 0 .8-.1.3-.1.5-.1.7-.3.2-.1.3-.3.4-.6.1-.2.2-.5.2-.9 0-.3-.1-.6-.2-.8-.1-.2-.3-.4-.5-.5-.2-.1-.4-.2-.7-.2-.2 0-.5-.1-.7-.1-.3 0-.6 0-.8.1v3.4h.8zm-.8 5.6c.2 0 .4 0 .6.1h.6c.3 0 .5 0 .8-.1.3 0 .5-.1.8-.3.2-.1.4-.3.6-.6.2-.2.2-.6.2-1s-.1-.7-.2-.9c-.1-.2-.3-.4-.5-.6-.2-.2-.5-.3-.8-.3-.3-.1-.6-.1-1-.1h-1.1v3.8zm8.1-10.8c.4-.1.9-.1 1.3-.1s.8 0 1.3.1v10.6h4.4c0 .2.1.4.1.6v1.1c0 .2 0 .4-.1.6h-7V6.1zm8.8 0c.5-.1.9-.1 1.3-.1s.9 0 1.3.1v12.8c-.5.1-.9.1-1.3.1s-.9 0-1.3-.1V6.1zm13.6 10.4c.2.3.3.7.4 1 .1.3.2.7.2 1.1-.6.2-1.2.4-1.7.4-.5.1-1 .1-1.6.1-1 0-1.9-.2-2.7-.5-.8-.3-1.4-.8-1.9-1.4-.5-.6-.9-1.3-1.2-2.1-.3-.8-.4-1.7-.4-2.6 0-1 .1-1.8.4-2.6.3-.8.7-1.5 1.2-2.1.5-.6 1.1-1.1 1.9-1.4.8-.3 1.6-.5 2.6-.5.6 0 1.1 0 1.6.1s1 .2 1.6.4c0 .4-.1.7-.2 1-.1.3-.3.7-.4 1-.4-.1-.8-.2-1.1-.3-.3-.1-.7-.1-1.1-.1-1.1 0-2 .4-2.6 1.1-.6.7-.9 1.8-.9 3.3 0 2.9 1.2 4.3 3.7 4.3.4 0 .8 0 1.2-.1.2.1.6 0 1-.1"/><path fill="#6C6870" d="M64.4 27.7h-4.3c-.1-.5-.1-1-.1-1.5s0-1 .1-1.5h12.2c.1.5.1 1 .1 1.5s0 1-.1 1.5H68V42c-.3 0-.6.1-.9.1h-1.7c-.3 0-.6 0-.9-.1V27.7zm13.1-3c.3 0 .7-.1 1-.1h1.9c.3 0 .6.1 1 .1L86.9 42c-.7.1-1.3.1-1.9.1-.6 0-1.2 0-1.8-.1l-1-3.5h-5.7l-1 3.5c-.6.1-1.1.1-1.7.1-.6 0-1.2 0-1.8-.1l5.5-17.3zm3.9 10.9l-2-7.3-2.1 7.3h4.1zm7.7-10.9c.3-.1.6-.1.9-.1h1.7c.3 0 .6 0 .9.1V42c-.3 0-.6.1-.9.1h-1.8c-.3 0-.6-.1-.9-.1V24.7zm4 8.6l4.7-8.6c.4-.1.7-.1 1-.1h1.8c.3 0 .7.1 1.1.1L97 33l5 9c-.4 0-.7.1-1.1.1h-1.8c-.3 0-.7-.1-1-.1l-5-8.7zm15.1-8.6c.3 0 .7-.1 1-.1h1.9c.3 0 .6.1 1 .1l5.4 17.3c-.7.1-1.3.1-1.9.1-.6 0-1.2 0-1.8-.1l-1-3.5h-5.7l-1 3.5c-.6.1-1.1.1-1.7.1-.6 0-1.2 0-1.8-.1l5.6-17.3zm3.9 10.9l-2-7.3-2.1 7.3h4.1zm6.9-10.9h9.8c.1.5.1 1 .1 1.5s0 1-.1 1.5h-6.3v4.1h5c.1.5.1 1 .1 1.5s0 1-.1 1.5h-5V42c-.6.1-1.2.1-1.7.1-.6 0-1.2 0-1.8-.1V24.7zm11.6 0c.3 0 .6-.1.9-.1h1.7c.3 0 .6 0 .9.1v9c0 1 0 1.8.1 2.5s.2 1.3.4 1.7c.2.5.5.8.9 1 .4.2.9.3 1.5.3s1.1-.1 1.5-.3c.4-.2.7-.6.9-1 .2-.5.4-1 .4-1.7.1-.7.1-1.5.1-2.5v-9c.3 0 .6-.1.9-.1h1.7c.3 0 .6 0 .9.1v9.7c0 1.2-.1 2.2-.3 3.2-.2 1-.5 1.8-1 2.5s-1.2 1.2-2 1.6c-.8.4-1.9.6-3.2.6-1.3 0-2.3-.2-3.2-.6-.8-.4-1.5-.9-2-1.6-.5-.7-.8-1.5-1-2.5-.2-1-.3-2-.3-3.2v-9.7zm15.7 0c.6-.1 1.2-.1 1.7-.1.6 0 1.1 0 1.8.1V39h6c.1.3.1.5.1.8v1.5c0 .2 0 .5-.1.8h-9.4V24.7zM24.8 10.8l7.9-7.9V1.2L24 10l.3.3c.2.1.3.3.5.5m2.5 7c1.5-1.5 3.3-2.3 5.4-2.5v-1.2c-2.1.2-4 1-5.6 2.3V18c.1-.1.2-.1.2-.2"/><path fill="#6C6870" d="M48 33.9V14.1L33.9 0v1.7l12.4 12.4H33.9v1.2h11.2l-7.9 7.9c-1.6-1.3-3.5-2.2-5.6-2.3H30c-1.4.1-2.8.5-4 1.2-.2.4-.5.8-.7 1.1-.1.2-.3.3-.4.5.2 0 .4 0 .6.1.4.1.9.2 1.3.3 1.3-.4 2.6-1.1 3.7-2h.3c2.1 0 4 .7 5.6 2-1.6 1.3-3.5 2-5.6 2h-.2c.2.2.4.3.5.5.2.2.4.4.6.7 2.1-.2 4-1 5.6-2.3l7.9 7.9H33.9c-.2-2.1-1-4-2.3-5.6H30l.2.2c1.5 1.5 2.3 3.3 2.5 5.4-2-.2-3.9-1.1-5.4-2.5l-.2-.2c-.1-1.4-.5-2.8-1.2-4-.4-.2-.8-.5-1.1-.7-.2-.1-.3-.3-.5-.4 0 .2 0 .4-.1.6-.1.4-.2.9-.3 1.3.4 1.3 1.1 2.6 2 3.7.2.2.3.4.5.5.2.2.4.4.7.6 1.6 1.3 3.5 2.1 5.6 2.3v11.2l-7.9-7.9-.3-.3-.6-.6c-1.3-1.6-2-3.5-2-5.6v-.2c-.2.2-.3.4-.5.5-.2.2-.4.4-.7.6.2 2.1 1 4 2.3 5.6.2.2.3.4.5.6l.3.3 8.7 8.7H15.2V32.7c.2-2 1.1-3.9 2.5-5.4l.2-.2c1.4-.1 2.8-.5 4-1.2.2-.4.4-.8.7-1.1.1-.2.3-.3.4-.5-.2 0-.4 0-.6-.1-.4-.1-.9-.2-1.3-.3-1.3.4-2.6 1.1-3.7 2-.2.2-.4.3-.5.5-.2.2-.4.4-.6.7-1.3 1.6-2.1 3.5-2.3 5.6V48h19.9L48 33.9zM33.9 46.3V33.9h12.4L33.9 46.3zm12.9-13.6L38 24l8.7-8.7v17.4z"/><path fill="#6C6870" d="M22 22c.4.2.8.5 1.1.7.2.1.3.3.5.4 0-.2 0-.4.1-.6.1-.4.2-.9.3-1.3-.4-1.3-1.1-2.6-2-3.7v-.3c0-2.1.7-4 2-5.6l-.6-.6-.3-.3c-1.3 1.6-2.2 3.5-2.3 5.6v1.6c.1 1.5.5 2.9 1.2 4.1"/><path fill="#D42150" d="M23.2 37.2l-7.9 7.9v1.7l8.7-8.7-.3-.3c-.2-.2-.4-.4-.5-.6m2.8-6.7v.2c0 2.1-.7 4-2 5.6l.6.6.3.3c1.3-1.6 2.2-3.5 2.3-5.6-.2-.2-.4-.4-.7-.6-.2-.2-.4-.3-.5-.5"/><path fill="#D42150" d="M14.1 0L0 14.1V34l14.1 14v-1.7L1.7 33.9h12.4v-1.2H2.9l7.9-7.9c1.6 1.3 3.5 2.2 5.6 2.3.2-.2.4-.4.6-.7l.5-.5h-.2c-2.1 0-4-.7-5.6-2 1.6-1.3 3.5-2 5.6-2h.2c1.1.9 2.3 1.6 3.7 2 .4.1.9.2 1.3.3.2 0 .4.1.6.1-.1.2-.3.3-.4.5-.3.4-.5.7-.7 1.1-.7 1.2-1.1 2.6-1.2 4l-.2.2c-1.5 1.5-3.3 2.3-5.4 2.5v1.2c2.1-.2 4-1 5.6-2.3.2-.2.4-.4.7-.6.2-.2.3-.4.5-.5.9-1.1 1.6-2.3 2-3.7.1-.4.2-.9.3-1.3 0-.2.1-.4.1-.6.2.1.3.3.5.4.4.3.7.5 1.1.7 1.2.7 2.6 1.1 4 1.2h1.6c-.2-.2-.4-.4-.6-.7-.2-.2-.4-.3-.5-.5-1.1-.9-2.3-1.6-3.7-2-.4-.1-.9-.2-1.3-.3-.2 0-.4-.1-.6-.1.1-.2.3-.3.4-.5.3-.4.5-.7.7-1.1.7-1.2 1.1-2.6 1.2-4v-1.6c-.2-2.1-1-4-2.3-5.6-.2-.2-.3-.4-.5-.6L24 10l-8.7-8.7h17.5v14.1c-.2 2-1.1 3.9-2.5 5.4l-.2.2h1.6c1.3-1.6 2.1-3.5 2.3-5.6V0H14.1zm0 1.7v12.4H1.7L14.1 1.7zM1.2 32.8V15.3L9.9 24l-8.7 8.8zm9.6-9.6l-7.9-7.9h11.2c.2 2.1.9 4 2.3 5.6-2.1.1-4 .9-5.6 2.3m12.4-12.4l.3.3.6.6c1.3 1.6 2 3.5 2 5.6v.2c-.9 1.1-1.6 2.3-2 3.7-.1.4-.2.9-.3 1.3 0 .2-.1.4-.1.6-.2-.1-.3-.3-.5-.4-.4-.3-.7-.5-1.1-.7-1.2-.7-2.6-1.1-4-1.2l-.2-.2c-1.5-1.5-2.3-3.3-2.5-5.4 2 .2 3.9 1.1 5.4 2.5l.2.2v-1.6c-1.6-1.3-3.5-2.1-5.6-2.3V2.9l7.8 7.9z"/></svg>
+                    </div>
+                    <div class="address-block">
+                        <h4><%= ownerName %></h4>
+                        <p><%= address1 %></p>
+                        <p><%= address2 %></p>
+                        <p><%= address3 %></p>
+                        <p><%= address4 %></p>
+                    </div>
+                </td>
+                <td cellpadding="0" cellspacing="0" valign="top" class="col-50">
+                    <p class="text1">AIA PUBLIC Takaful Bhd. <span class="text2">(935955-M)</span></p>
+                    <table cellspacing="0" style="margin-top: 25px;">
+                        <tr>
+                            <td cellpadding="0" cellspacing="0" valign="top">
+                                <div class="address-block2">
+                                    <p>Menara AIA, 99 Jalan Ampang</p>
+                                    <p>50450 Kuala Lumpur</p>
+                                    <p>P. O. Box 13009</p>
+                                    <p>50796 Kuala Lumpur</p>
+                                </div>
+                            </td>
+                            <td class="address-block2" cellpadding="0" cellspacing="0" valign="top">
+                                <p>Careline: 1300 88 1899</p>
+                                <p>T: (603) 2056 1111</p>
+                                <p>AIA.COM.MY</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" valign="top">
+                                <p>GST Registration No. / No. Pendaftaran GST: 000518324224</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="text3" style="margin-top: 30px;">Official Receipt</p>
+                    <p class="text3"><em>Resit Rasmi</em></p>
+                </td>
+            </tr>
+            <tr>
+                <td cellpadding="0" cellspacing="0" class="col-50">
+                    &nbsp;
+                </td>
+                <td cellpadding="0" cellspacing="0" class="align-right col-50">
+                    <div class="rcpt-no">
+                        <p style="margin-bottom: 6px;">Receipt No. : <span><%= receiptNo %></span></p>
+                        <p>Date / Time : <span><%= date %></span> <span><%= time %></span></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <table cellspacing="0" class="details-table">
+                        <tr class="border-thick">
+                            <th class="align-left" valign="top" cellpadding="0" cellspacing="0" style="width: 10%;">
+                                <span>Certificate/Vitality No</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 15%;">
+                                <span>Contribution</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 15%;">
+                                <span>Stamp Duty</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 15%;">
+                                <span>GST</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 15%;">
+                                <span>MISC</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 10%;">
+                                <span>GST for MISC</span>
+                            </th>
+                            <th valign="top" cellpadding="0" cellspacing="0" style="width: 10%;">
+                                <span>Top Up</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="align-left">
+                                <span><%= policyNo %></span>
+                            </td>
+                            <td>
+                                <span><%= modalPremiumNoGST %></span>
+                            </td>
+                            <td>
+                                <span><%= stampDuty %></span>
+                            </td>
+                            <td>
+                                <span><%= gst %></span>
+                            </td>
+                            <td>
+                                <span>.00</span>
+                            </td>
+                            <td>
+                                <span>.00</span>
+                            </td>
+                            <td>
+                                <span><%= topup %></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="padding-top: 45px; padding-bottom: 45px; border: none; text-align: left;">
+                                <h3>Received with thanks the sum of <span style="color: #d31145;">RM <%= total %></span></h3>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="background: #f1f1f1" colspan="8">
+                    <table class="summary-table">
+                        <tr>
+                            <td style="width: 30%">
+                                <span>Status</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span><%= policyStatus %></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%">
+                                <span>Due Date</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span><%= premiumDueDate %></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%">
+                                <span>Frequency</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span><%= freqDesc %></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%">
+                                <span>Branch Name / Ambassador ID</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span><%= branchName %></span> <span> / <%= staffInfo %> </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%">
+                                <span>Agent Name / Agent ID</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span><%= username %></span> <span> / <%= userId %></span>
+                            </td>
+                        </tr>
+<!--                         <tr>
+                            <td style="width: 30%">
+                                <span>Status</span>
+                            </td>
+                            <td style="width: 70%">
+                                <span></span>
+                            </td>
+                        </tr> -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="notice-block">
+        <table>
+            <tr>
+                <td class="col-50">
+                    <h4>Important Notice:</h4>
+                    <ul>
+                        <li>This receipt will supersede any manual receipt issued for the same payment, if any.
+                        </li>
+                        <li>This is computer generated receipt and no signature is required.</li>
+                        <li>The amount received is inclusive of GST (where applicable).</li>
+                    </ul>
+                </td>
+                <td class="col-50">
+                    <h4>Notis Penting:</h4>
+                    <ul>
+                        <li>Resit ini akan menggantikan resit manual yang dikeluarkan untuk bayaran yang sama, jika ada.
+                        </li>
+                        <li>Resit ini adalah cetakan komputer dan tidak memerlukan tandatangan.</li>
+                        <li>Jumlah yang diterima adalah termasuk GST (jika berkenaan.)</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

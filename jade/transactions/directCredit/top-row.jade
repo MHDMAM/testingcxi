@@ -1,0 +1,17 @@
+.row
+  .col-90.center-block
+    h3(translate='transactions.dc.form_header')
+    .row.has-border-padding.margin-bottom-large
+      .col-25.padding-right-medium
+        .pol-value(translate='transactions.dc.person_covered')
+        .pol-property {{viewData.userInfo.policyOwnerName || 'N/A'}}
+      .col-25.padding-right-medium
+        .pol-value(translate='transactions.dc.identification_no')
+        .pol-property {{viewData.userInfo.idNo || 'N/A'}}
+      .col-25.padding-right-medium
+        .pol-value(translate='transactions.dc.mobile_no')
+        .pol-property {{viewData.userInfo.mobileNo || 'N/A'}}
+      .col-25.padding-right-medium
+        .pol-value(translate='transactions.dc.email_id')
+        .pol-property {{viewData.userInfo.email || 'N/A'}}
+

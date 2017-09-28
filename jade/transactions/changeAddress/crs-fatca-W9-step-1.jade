@@ -1,0 +1,88 @@
+#step1(ng-if='steps === "w9"')
+  //- .center.margin-bottom-xl
+  //-   h2(translate='transactions.changeAddress.crs.fatcaW9.step1.page_title')
+  //-   span.block(translate='transactions.changeAddress.crs.fatcaW9.step1.sub_title')
+  .row
+    .col-90.center-block
+      .form-container
+        h3(translate='transactions.changeAddress.crs.fatcaW9.step1.acc_holder_details')
+        //- form(name='w9Form')
+        .row.margin-bottom-xs
+          .col-50.padding-right-medium
+            span.pol-value.required(translate='transactions.changeAddress.crs.fatcaW9.step1.account_holder') 
+            label.item.item-input.input-margin(ng-class="{'form-error-input':w9Form.name.$dirty && !w9Form.name.$valid}")
+              input(type='text', name='name', ng-model='data.policyOwnerInfo.name', required)
+            .error-container(ng-messages='w9Form.name.$error', ng-if='w9Form.name.$dirty')
+              small.error(ng-message='required', translate='transactions.changeAddress.crs.fatcaW9.step1.accHolder_required')
+          .col-50.padding-left-medium
+            span.pol-value(translate='transactions.changeAddress.crs.fatcaW9.step1.acc_placeholder')
+        span.pol-value.font-bold.margin-top-medium(translate='transactions.changeAddress.crs.fatcaW9.step1.addr_title')
+        .row.margin-bottom-xs
+          .col-50.padding-right-medium
+            span.pol-value.required(translate='transactions.changeAddress.step1.adrs_line1')
+            label.item.item-input.input-margin.disable-input(ng-class="{'form-error-input':w9Form.address1.$dirty && !w9Form.address1.$valid}")
+              input(type='text', name='address1', ng-model='data.addressInfo.address1', maxlength='30', required='required', ng-disabled='true')
+            .error-container(ng-messages='w9Form.address1.$error', ng-if='w9Form.address1.$dirty')
+              small.error(ng-message='required', translate='transactions.changeAddress.msgs.address1_required')
+          .col-50.padding-left-medium(ng-show='data.addressInfo.country==="MAL"')
+            span.pol-value.required(translate='transactions.changeAddress.step1.post_code')
+            label.item.item-input.input-margin.disable-input(ng-class="{'form-error-input':w9Form.postCode.$dirty && !w9Form.postCode.$valid}")
+              input(type='tel', name='postCode', ng-model='data.addressInfo.postCode', required='required', maxlength='5', pattern='[0-9]{5}', ng-disabled='true')
+            .error-container(ng-messages='w9Form.postCode.$error', ng-if='w9Form.postCode.$dirty')
+              small.error(ng-message='required', translate='transactions.changeAddress.msgs.postCode_required')
+          .row.margin-bottom-xs
+            .col-50.padding-right-medium
+              span.pol-value(translate='transactions.changeAddress.step1.adrs_line2')
+              label.item.item-input.input-margin.disable-input
+                input(type='text', name='address2', ng-model='data.addressInfo.address2', maxlength='30', ng-disabled='true')
+            .col-50.padding-left-medium(ng-show='data.addressInfo.country==="MAL"')
+              span.pol-value.required(translate='transactions.changeAddress.step1.state')
+              label.item.item-input.selectArrow.disable-input(ng-class="{'form-error-input':w9Form.state.$dirty && !w9Form.state.$valid}")
+                select(name='state', ng-model='data.addressInfo.state', ng-options='state as state for state in viewData.states', ng-disabled='true', ng-required='data.addressInfo.country==="MAL"')
+              .error-container(ng-messages='w9Form.state.$error', ng-if='w9Form.state.$dirty')
+                small.error(ng-message='required', translate='transactions.changeAddress.msgs.state_required')
+          .row.margin-bottom-xs
+            .col-50.padding-right-medium
+              span.pol-value(translate='transactions.changeAddress.step1.adrs_line3')
+              label.item.item-input.input-margin.disable-input
+                input(type='text', name='address3', ng-model='data.addressInfo.address3', maxlength='30', ng-disabled='true')
+            .col-50.padding-left-medium
+              span.pol-value.required(translate='transactions.changeAddress.step1.country')
+              label.item.item-input.selectArrow.disable-input(ng-class="{'form-error-input':w9Form.country.$dirty && !w9Form.country.$valid}")
+                select(name='country', ng-model='data.addressInfo.country', ng-options='country.key as country.country for country in viewData.countries', ng-disabled='true', required='required')
+              .error-container(ng-messages='w9Form.country.$error', ng-if='w9Form.country.$dirty')
+                small.error(ng-message='required', translate='transactions.changeAddress.msgs.country_required')
+        h3(translate='transactions.changeAddress.crs.fatcaW9.step1.tin')
+        .row.margin-bottom-xs
+          .col-50.padding-right-medium
+            span.pol-value.required(translate='transactions.changeAddress.crs.fatcaW9.step1.ssn')
+            label.item.item-input.input-margin(ng-class="{'form-error-input':w9Form.ssn.$dirty && !w9Form.ssn.$valid, 'disable-input':fatca.w9.ssnCheck}")
+              input(type='text', name='ssn', ng-model='fatca.w9.ssn', maxlength='30', ng-required='!fatca.w9.ssnCheck', ng-disabled='fatca.w9.ssnCheck')
+            .error-container(ng-messages='w9Form.ssn.$error', ng-if='w9Form.ssn.$dirty && !fatca.w9.ssnCheck')
+              small.error(ng-message='required', translate='transactions.changeAddress.crs.fatcaW9.step1.ssn_required')
+          .col-50.padding-left-medium
+            span.pol-value(translate='transactions.changeAddress.crs.fatcaW9.step1.fatca_code')  
+            label.item.item-input.input-margin
+              input(type='text', name='fatcaCode', ng-model='fatca.w9.fatcaCode', maxlength='30')
+        .row
+          .col-50.padding-right-medium
+            .checkbox-display-with-terms
+            .agree-checkbox.margin-top-medium.margin-bottom-medium
+              li.item.item-checkbox
+                label.checkbox
+                  input(type='checkbox', name='ssnCheck', ng-model='fatca.w9.ssnCheck', ng-disabled='fatca.w9.ssn && fatca.w9.ssn !== ""')
+                span {{'transactions.changeAddress.crs.fatcaW9.step1.ssn_check' | translate}}
+        .row.border-bottom.margin-bottom-xs
+          .col-90.padding-right-medium
+            span.sub-text(translate='transactions.changeAddress.crs.fatcaW9.step1.ssn_msg1', ng-show='fatca.w9.ssnCheck') &nbsp;
+          span.sub-text.strong.margin-bottom-xs(translate='transactions.changeAddress.crs.fatcaW9.step1.ssn_msg2', ng-show='fatca.w9.ssnCheck')
+        .row.margin-bottom-xs
+          .col-50.padding-right-medium
+            span.pol-value(translate='transactions.changeAddress.crs.fatcaW9.step1.list_acc')
+            label.item.item-input.input-margin
+              input(type='text', name='listofAcc', ng-model='fatca.w9.listofAcc', maxlength='30')
+      //- .row
+      //-   .col
+      //-     .center-buttons
+      //-       button.button.button-calm.button-wide.button-major(ng-click='close()', translate='transactions.changeAddress.crs.fatcaW9.step1.cancel')
+      //-       button.button.button-major.button-wide(ng-click='gotoCRS()', translate='transactions.changeAddress.next', ng-disabled='w9Form.$invalid')

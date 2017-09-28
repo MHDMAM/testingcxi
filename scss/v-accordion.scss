@@ -1,0 +1,167 @@
+/* -------------------------------------*/
+/* Settings*/
+/* -------------------------------------*/
+
+
+$v-accordion-default-theme:         true !default;
+
+
+/* Accordion*/
+/* -------------------------------------*/
+
+$v-accordion-spacing:               20px !default;
+
+$v-pane-border-color:               #D8D8D8 !default;
+$v-pane-expanded-border-color:      #2196F3 !default;
+$v-pane-icon-color:                 #2196F3 !default;
+$v-pane-hover-color:                #2196F3 !default;
+$v-pane-disabled-opacity:           0.6 !default;
+
+$v-pane-expand-animation-duration:  0.5s  !default;
+$v-pane-hover-animation-duration:   0.25s !default;
+
+
+/* Base styles
+ ***************************************/
+
+
+v-accordion {
+  display: block;
+  padding: 0 24px;
+
+}
+
+v-pane {
+  display: block;
+  margin-bottom: 16px;
+  padding: 16px 24px;
+
+  &.is-expanded {
+    > v-pane-content {
+      > div {
+        display: visible;
+      }
+    }
+  }
+
+  &[disabled] > v-pane-header {
+    opacity: $v-pane-disabled-opacity;
+    pointer-events: none;
+  }
+}
+
+v-pane-header {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+v-pane-content {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-height: 0px;
+
+  > div {
+    visibility: none;
+  }
+}
+
+
+/* Theme: default
+ ***************************************/
+
+
+.vAccordion--default {
+
+  v-accordion {
+    margin-top: $v-accordion-spacing;
+    padding-left: $v-accordion-spacing;
+  }
+
+  v-pane-content {
+    > div {
+      padding-bottom: $v-accordion-spacing;
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: all $v-pane-expand-animation-duration;
+    }
+  }
+
+  v-pane {
+    overflow: hidden;
+
+    &.is-expanded {
+      > v-pane-header {
+        border-bottom-color: $v-pane-expanded-border-color;
+
+        &::after {
+          transform: rotate(90deg);
+          opacity: 0;
+        }
+        &::before {
+          transform: rotate(0deg);
+        }
+      }
+
+      > v-pane-content > div {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    &[disabled] v-pane-header {
+      &::after,
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  v-pane-header {
+    padding: 5px 0;
+    margin-bottom: $v-accordion-spacing;
+    //border-bottom: 2px solid $v-pane-border-color;
+    transition: all $v-pane-hover-animation-duration;
+
+    .indicator-collapse{
+      // display: inline-block;
+      // float: right;
+      color: $link-blue;
+      font-size: 20px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+
+    > div {
+      display: block;
+      > span{
+        font-family: AIASans;
+        font-size: 30px;
+      }
+
+
+    }
+
+    &::before {
+      transform: rotate(-90deg);
+    }
+
+    &:hover,
+    &:focus {
+      color: $v-pane-hover-color;
+    }
+  }
+}
+
+

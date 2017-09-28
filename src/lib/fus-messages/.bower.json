@@ -1,0 +1,37 @@
+{
+  "name": "fus-messages",
+  "version": "0.0.2",
+  "homepage": "https://github.com/fusionalliance/fus-messages",
+  "authors": [
+    "Corinna Cohn <ccohn@fusionalliance.com>"
+  ],
+  "description": "Friendly wrapper for ngMessages 1.4+",
+  "main": "dist/fus-messages.js",
+  "keywords": [
+    "angular",
+    "ngmessages"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.4.0",
+    "angular-mocks": "^1.4.0"
+  },
+  "dependencies": {
+    "angular-messages": "^1.4.0"
+  },
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "d1a0b88b22129b340064f02a13956a59423b29ef"
+  },
+  "_source": "https://github.com/fusionalliance/fus-messages.git",
+  "_target": "~0.0.2",
+  "_originalSource": "fus-messages"
+}

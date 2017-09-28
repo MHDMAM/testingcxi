@@ -1,0 +1,22 @@
+ion-modal-view.crsUScitizenConfirmationModal.us-modal-height
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changeAddress.crs.fatcaW9.modal.crs_header')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='cancel()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium.status-message
+        span.body-text4.pol-value(translate='transactions.changeAddress.crs.fatcaW9.modal.crs_title')
+
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-wide.button-major(ng-click='no()', translate='transactions.changeAddress.crs.fatcaW9.modal.no')
+      .col-10
+      .col-33
+        button.button.button-major.button-wide(ng-click='yes()', translate='transactions.changeAddress.crs.fatcaW9.modal.yes')
+      .col-10
+
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium
+        span.pol-value.center(translate='transactions.changeAddress.crs.fatcaW9.modal.crs_disclaimer')

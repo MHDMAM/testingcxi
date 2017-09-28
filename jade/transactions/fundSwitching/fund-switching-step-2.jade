@@ -1,0 +1,68 @@
+#step2.ng-enter(ng-if='steps===2')      
+  //- main content
+  form(name='step2Form').row.margin-bottom-large
+    .col-90.center-block
+      .row
+        //- from current fund
+        .col-50.padding-right-medium
+          span.pol-value.font-bold.padding-left-xs(translate='transactions.fs.step2.from_current_fund')
+          .row
+
+              .row.has-border-padding.topup-scroll-row(ng-repeat='item in viewData.userFromFunds')
+                .col
+                  .row
+                    .col-50.padding-right-xxs
+                      label.item.item-input.selectArrow
+                        select.formInput(name='ffdd_{{$index}}', ng-model='viewData.selectedFromFunds[$index]', ng-options='fund as fund.typeOfFund for fund in data.fromFunds', ng-change='fundSelected(viewData.selectedFromFunds, $index, "from")', required)
+                         option(value='')
+                    .col-25.padding-right-xxs
+                      label.item.item-input(style='margin-top: 5px;', ng-class="{'disabledItem' : step2Form['ffdd_' + $index].$invalid}")
+                        input.padding-right-medium(name='fromFundPct', ng-model='viewData.selectedFromFunds[$index].fromFundPct', type='number', min='1', max='100', placeholder='', size='2', ng-disabled="step2Form['ffdd_' + $index].$invalid", ng-blur='fundChange(viewData.selectedFromFunds, $index, "from")', required)
+                    .col-25.span-vertical-center
+                      span(translate='transactions.fs.pct_withdrawal')
+                  //- .span.pol-value.margin-top-small(translate='transactions.fs.cancel', ng-click='cancelFromFund($index)', ng-show='viewData.userFromFunds.length > 1')
+                  div.pull-left.major-link.stable(ng-click='cancelFromFund($index)', ng-show='viewData.userFromFunds.length > 1')
+                    span.span-vertical-center.padding-left-xxs(translate='transactions.fs.remove')
+                    span.span-vertical-center.ion-trash-a
+          //- add fund button
+          .row
+            .col
+              span.span-vertical-center.padding-left-xxs
+              div.pull-left.major-link.blue(ng-click='addFromFund()', ng-show='viewData.userFromFunds.length < 10')
+                span.span-vertical-center(translate='transactions.fs.add_fund')
+                span.span-vertical-center.ion-plus
+            //- .col
+            //-   span(translate='transactions.fs.add_fund')
+            //- .col
+            //-   span.ion-arrow-right-b
+        //- switch to fund
+        .col-50.padding-left-medium
+          span.pol-value.font-bold.padding-left-xs(translate='transactions.fs.switch_to_fund')
+          .row
+
+              .row.has-border-padding.topup-scroll-row(ng-repeat='item in viewData.userToFunds')
+                .col
+                  .row
+                    .col-50.padding-right-xxs
+                      label.item.item-input.selectArrow
+                        select.formInput(name='tfdd_{{$index}}', ng-model='viewData.selectedToFunds[$index]', ng-options='fund as fund.typeOfFund for fund in data.toFunds', ng-change='fundSelected(viewData.selectedToFunds, $index, "to")', required)
+                         option(value='')
+                    .col-25.padding-right-xxs
+                      label.item.item-input(style='margin-top: 5px;', ng-class="{'disabledItem' : step2Form['tfdd_' + $index].$invalid}")
+                        input.padding-right-medium(name='ToFundPct', ng-model='viewData.selectedToFunds[$index].toFundPct', placeholder='', size='2', type='number', min='1', max='100', ng-disabled="step2Form['tfdd_' + $index].$invalid", ng-blur='fundChange(viewData.selectedToFunds, $index, "to")', required)
+                    .col-25.span-vertical-center
+                      span(translate='transactions.fs.step2.allocation')
+                  div.pull-left.major-link.stable(ng-click='cancelToFund($index)', ng-show='viewData.userToFunds.length > 1')
+                    span.span-vertical-center.padding-left-xxs(translate='transactions.fs.remove')
+                    span.span-vertical-center.ion-trash-a
+          //- add fund button
+          .row
+            .col
+              span.span-vertical-center.padding-left-xxs
+              div.pull-left.major-link.blue(ng-click='addToFund()', ng-show='viewData.userToFunds.length < 10')
+                span.span-vertical-center(translate='transactions.fs.add_fund')
+                span.span-vertical-center.ion-plus
+            //- .col
+            //-   span(translate='transactions.fs.add_fund')
+            //- .col
+            //-   span.ion-arrow-right-b

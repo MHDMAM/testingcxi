@@ -1,0 +1,28 @@
+#step2.ng-enter(ng-if='steps===4')
+  .row
+    .col-90.center-block
+      //- main content
+      include fund-switching-confirm-content 
+  .full-bleed.margin-top-small(style='margin-top: -45px;')
+    .col-90.center-block
+      p {{'transactions.cancelAutoDebit.step2.enter_vcode_title' | translate}} 
+        span.font-bold {{data.clientDetails.mobileNo | phonemask}}
+      span
+      | {{'transactions.cancelAutoDebit.step2.enter_vcode_title2' | translate}}
+      //- verification code
+      form.verification-block(name='step4Form')
+
+        label.item.item-input.margin-bottom-small.margin-top-small
+          input.center-block(type='text', ng-model='data.verificationCode' placeholder="Enter verification code", translate='transactions.medcard_replacement.resend_code', minlength='6', maxlength='6', required)
+        
+        button.button.button-major.button-wide.button-calm(ng-click='requestOTP()', translate='transactions.medcard_replacement.resend_code', required)
+
+   
+        .checkbox-display-with-terms
+          div.agree-checkbox.margin-top-medium.margin-bottom-medium
+            li.item.item-checkbox
+              label.checkbox
+                input(type='checkbox', name='tnc', ng-model='data.tncChecked', required)
+              span {{'transactions.fs.tc.read_tnc1' | translate}}&nbsp;
+            span.inline-link(translate='transactions.fs.tc.read_tnc2', ng-click='termsNconditions()') 
+

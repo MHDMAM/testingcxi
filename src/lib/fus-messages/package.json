@@ -1,0 +1,39 @@
+{
+  "name": "fus-messages",
+  "version": "0.0.2",
+  "description": "Friendly wrapper for ngMessages 1.4+",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fusionalliance/fus-messages"
+  },
+  "keywords": [
+    "angular",
+    "ngmessages"
+  ],
+  "author": "corinna000@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fusionalliance/fus-mesages/issues"
+  },
+  "homepage": "https://github.com/fusionalliance/fus-mesages",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-filter": "^2.0.2",
+    "gulp-jshint": "^1.10.0",
+    "gulp-karma": "0.0.4",
+    "gulp-ng-annotate": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "jasmine-core": "^2.3.2",
+    "jshint-stylish": "^1.0.2",
+    "karma": "^0.12.31",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
+}

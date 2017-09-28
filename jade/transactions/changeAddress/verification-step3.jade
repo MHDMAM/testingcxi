@@ -1,0 +1,49 @@
+.row.margin-bottom-medium
+  .col-90.center-block
+    h3(translate="transactions.changeAddress.step3.section3.title")
+    .row.has-border-padding.margin-bottom-small.has-border-padding
+      .col-33.padding-right-medium
+        .pol-value(translate="transactions.changeAddress.step3.section3.name_of_account_holder")
+        .pol-property.display-block {{data.policyOwnerInfo.name}}
+      .col-33.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.step3.section3.tax_classification")
+        div(ng-switch='fatca.selectedStep')
+          .pol-property.display-block(ng-switch-when='w8') U.S. Indicia
+          .pol-property.display-block(ng-switch-when='w9') U.S. Person
+          .pol-property.display-block(ng-switch-default) N/A
+      .col-33.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.step3.section3.cert_received_date")
+        .pol-property.display-block(ng-if="fatca.selectedStep === 'w8'") {{data.receivedW8Form || fatca.newSubmitionDate}}
+        .pol-property.display-block(ng-if="fatca.selectedStep === 'w9'") {{data.receivedW9Form || fatca.newSubmitionDate}}
+        .pol-property.display-block(ng-if="!fatca.selectedStep") N/A
+    .row.has-border-padding.margin-bottom-small.has-border-padding
+      .col-33.padding-right-medium
+        .pol-value(translate="transactions.changeAddress.step3.section3.tax_payer_id_no")
+        .pol-property.display-block {{fatca.w9.ssn || fatca.w8.ssn || 'N/A'}}
+      .col-33.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.step3.section3.fatca_exemption_reporting_code")
+        .pol-property.display-block {{fatca.w9.fatcaCode || fatca.w8.tin || 'N/A'}}
+      .col-33.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.crs.w8.dob")
+        .pol-property.display-block {{(fatca.w8.dob | date:'mediumDate') || 'N/A'}}
+    .row.has-border-padding.margin-bottom-small.has-border-padding
+      .col-33.padding-right-medium
+        .pol-value(translate='transactions.changeAddress.crs.w8.perm_residence_addr')
+        .pol-property.display-block(ng-if="fatca.selectedStep == 'w8' || fatca.selectedStep == 'w9' ") {{data.addressInfo.address1}}
+        .pol-property.display-block(ng-if="fatca.selectedStep == 'w8' || fatca.selectedStep == 'w9' ") {{data.addressInfo.address2}}
+        .pol-property.display-block(ng-if="fatca.selectedStep == 'w8' || fatca.selectedStep == 'w9' ") {{data.addressInfo.address3}}
+        .pol-property.display-block(ng-if="data.addressInfo.country=='MAL' && (fatca.selectedStep == 'w8' || fatca.selectedStep == 'w9' )") {{data.addressInfo.postCode || data.addressInfo.postcode}}, {{data.addressInfo.state}}
+        .pol-property.display-block(ng-if="fatca.selectedStep == 'w8' || fatca.selectedStep == 'w9' ") {{data.addressInfo.country | countrykey}}
+        .pol-property.display-block(ng-if="!fatca.selectedStep") N/A
+
+      .col-33.padding-right-medium
+        .pol-value(translate='transactions.changeAddress.crs.w8.mailing_addr')
+        .pol-property.display-block(ng-if="fatca.w8.addressInfo.address1") {{fatca.w8.addressInfo.address1}}
+        .pol-property.display-block(ng-if="fatca.w8.addressInfo.address2") {{fatca.w8.addressInfo.address2}}
+        .pol-property.display-block(ng-if="fatca.w8.addressInfo.address3") {{fatca.w8.addressInfo.address3}}
+        .pol-property.display-block(ng-if="data.addressInfo.country=='MAL' && (fatca.w8.addressInfo.postcode ||fatca.w8.addressInfo.postCode) && fatca.w8.addressInfo.state") {{fatca.w8.addressInfo.postcode || fatca.w8.addressInfo.postCode}}, {{fatca.w8.addressInfo.state}}
+        .pol-property.display-block(ng-if="fatca.w8.addressInfo.country") {{fatca.w8.addressInfo.country | countrykey}}
+        .pol-property.display-block(ng-if="!fatca.w8.addressInfo") N/A
+      .col-33.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.crs.w8.ref_number_optional")
+        .pol-property.display-block {{fatca.w8.referenceNo || 'N/A' }}

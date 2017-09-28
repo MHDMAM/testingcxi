@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="aia-cordova-plugin" version="0.1.0">
+    <name>AIA plugin</name>
+    <author>AIA awesome team</author>
+    <description></description>
+    <keywords></keywords>
+    <license>MIT</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <js-module src="www/aiaPlugin.js" name="AiaPlugin">
+        <clobbers target="aiaPlugin" />
+    </js-module>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AiaPlugin">
+                <param name="ios-package" value="AiaPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/AiaPlugin.h" />
+        <source-file src="src/ios/AiaPlugin.m" />
+    </platform>
+</plugin>

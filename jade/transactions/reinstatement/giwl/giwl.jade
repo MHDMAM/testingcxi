@@ -1,0 +1,81 @@
+ion-view(view-title="{{'transactions.reinstatement.giwl.title' | translate}}")
+  ion-content.page-padding
+
+    .center.margin-bottom-xl
+      h2(translate='transactions.reinstatement.giwl.title')
+
+    //- customer details
+    .row
+      .col-90.center-block
+        include giwl-form-header
+
+        //- main content
+        form(name='step1Form')  
+          .row.margin-bottom-large
+            .col
+              .row.margin-bottom-xs
+                .col-50.padding-right-medium
+                  //- policy owner name
+                  span.pol-value(translate='transactions.reinstatement.giwl.policy_owner_name')
+                  label.item.item-input.input-margin(ng-class="{'form-error-input':step1Form.policyOwnerName.$dirty && !step1Form.policyOwnerName.$valid, 'disable-input':viewData.clientDetails.policyOwnerName}")
+                    input(type='text', name='policyOwnerName', ng-model='data.clientDetails.policyOwnerName', maxlength='30', required, ng-disabled='viewData.clientDetails.policyOwnerName')
+                  .error-container(ng-messages='step1Form.policyOwnerName.$error', ng-if="step1Form.policyOwnerName.$dirty")
+                    small.error(ng-message='required', translate='transactions.reinstatement.giwl.msgs.required')
+                .col-50.padding-left-medium
+                  //- nric
+                  .row
+                    .col-50.padding-right-medium
+                      span.pol-value(translate='transactions.reinstatement.giwl.identification_no')
+                      label.item.item-input.selectArrow(ng-class="{'disable-input':data.select_nricType}")
+                        span(ng-show='data.select_nricType', style='min-height: 48px;') {{data.select_nricType.name}}
+                        select.formInput(name='nricType', data-ng-options='item as item.name for item in viewData.nricTypes', required, ng-hide='data.select_nricType', data-ng-model='data.select_nricType')
+                          option(value='') Please Select
+                          
+                    .col-50
+                      span.pol-value &nbsp;
+                      label.item.item-input.input-margin(ng-class="{'form-error-input':step1Form.nric.$dirty && !step1Form.nric.$valid, 'disable-input':viewData.clientDetails.idNo}")
+                        input(type='text', name='nric', ng-model='data.clientDetails.idNo', maxlength='12', required, ng-disabled='viewData.clientDetails.idNo')
+                      .error-container(ng-messages='step1Form.nric.$error', ng-if="step1Form.nric.$dirty")
+                        small.error(ng-message='required', translate='transactions.reinstatement.giwl.msgs.required')
+
+              .row.margin-bottom-xs
+                .col-50.padding-right-medium
+                  //- mobile no.
+                  span.pol-value(translate='transactions.reinstatement.giwl.mobile_no')
+                  label.item.item-input.input-margin(ng-class="{'form-error-input':step1Form.mobileNo.$dirty && !step1Form.mobileNo.$valid, 'disable-input':viewData.clientDetails.mobileNo}")
+                    input(type='tel', name='mobileNo', ng-model='data.clientDetails.mobileNo', maxlength='20', required, ng-disabled='viewData.clientDetails.mobileNo')
+                  .error-container(ng-messages='step1Form.mobileNo.$error', ng-if="step1Form.mobileNo.$dirty")
+                    small.error(ng-message='required', translate='transactions.reinstatement.giwl.msgs.required')
+                .col-50.padding-left-medium
+                  //- email
+                  span.pol-value(translate='transactions.reinstatement.giwl.email')
+                  label.item.item-input.input-margin(ng-class="{'form-error-input':step1Form.email.$dirty && !step1Form.email.$valid, 'disable-input':viewData.clientDetails.email}")
+                    input(type='email', name='email', ng-model='data.clientDetails.email', required, ng-disabled='viewData.clientDetails.email')
+                  .error-container(ng-messages='step1Form.email.$error', ng-if="step1Form.email.$dirty")
+                    small.error(ng-message='required', translate='transactions.reinstatement.giwl.msgs.required')
+
+          //- tnc check
+          .row
+            div.margin-bottom-xl.checkbox-display-with-terms
+              //- form.checkbox-display-with-terms(name='agreementForm')
+              li.item.item-checkbox
+                label.checkbox
+                  input(type='checkbox' name='readAgreement', ng-model='viewData.readAgreement', required) 
+                span(translate='transactions.reinstatement.giwl.agreement_text1')
+                | &nbsp;
+                span.inline-link(ng-click='viewAgreement()', translate='transactions.reinstatement.giwl.agreement_text2') 
+          .row
+            div.margin-bottom-xl.checkbox-display-with-terms
+              //- form.checkbox-display-with-terms(name='termsForm')
+              li.item.item-checkbox
+                label.checkbox
+                  input(type='checkbox' name='readTnc', ng-model='viewData.readTnc', required) 
+                span(translate='transactions.reinstatement.giwl.terms_text1')
+                | &nbsp;
+                span.inline-link(ng-click='viewTnc()', translate='transactions.reinstatement.giwl.terms_text2') 
+
+        //- buttons
+        .row
+          .col
+            .center-buttons
+              button.button.button-major.button-wide(ng-click='gotoPayment()', translate='transactions.reinstatement.giwl.payment', ng-disabled='step1Form.$invalid')

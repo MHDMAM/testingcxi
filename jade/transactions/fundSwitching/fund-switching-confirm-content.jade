@@ -1,0 +1,43 @@
+.row.margin-bottom-large
+  //- left pane
+  .col-50.slider-card
+    h4(translate='transactions.fs.from_current_fund_of')
+    .row.has-border-padding
+      .col-60
+        span.pol-value.font-bold(translate='transactions.fs.fund_name')
+      .col-40
+        span.pol-value.font-bold(translate='transactions.fs.step4.withdrawal')
+    .row.topup-scroll
+      ion-content
+        .row.has-border-padding(ng-repeat='item in viewData.selectedFromFunds')
+          .col-60
+            span.pol-value {{item.typeOfFund}}
+          .col-40
+            span.pol-value {{item.fromFundPct}}
+  //- right pane
+  .col-50.slider-card
+    .row
+      .col-50
+        //- chart here baby
+        .div
+          .div(ng-init='chartSize=210')
+            canvas#doughnut.chart.chart-doughnut(height='{{chartSize}}', chart-data='viewData.donutChartData', chart-labels='viewData.donutChartLabels', chart-dataset-override='viewData.donutChartDataset')
+          .div(style='position: relative; margin-top: -133px')
+            canvas#pie.chart.chart-pie(height='{{chartSize * 0.6875}}', chart-data='viewData.pieChartData', chart-labels='viewData.pieChartLabels', chart-dataset-override='viewData.pieChartDataset')
+
+      .col-50.topup-scroll(style='min-height: 285px;')
+        ion-content
+          h4(translate='transactions.fs.switch_to_fund')
+          .row(ng-repeat='item in viewData.selectedToFunds')
+            .col-10
+              //- color here
+              .div(style='width: 10px; height: 10px; background-color: {{item.color}};')
+            .col-90
+              span.pol-value {{item.typeOfFund}} ({{item.toFundPct}}%)
+          h4.margin-top-small(translate='transactions.fs.step4.new_premium_allocation', ng-if='viewData.premiumAllocations.length>0')
+          .row(ng-repeat='item in viewData.premiumAllocations')
+            .col-10
+              //- color here
+              .div(style='width: 10px; height: 10px; background-color: {{item.color}};')
+            .col-90  
+              span.pol-value {{item.typeOfFund}} ({{item.allocationPercent}}%)

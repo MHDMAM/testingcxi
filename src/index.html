@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <meta name="format-detection" content="telephone=no">
+    <script type="text/javascript">
+    _ENV_PROD = false;
+  </script>
+  <!--
+  Customize this policy to fit your own app's needs. For more guidance, see:
+      https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+  Some notes:
+      * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+      * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+      * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        Enable inline JS: add 'unsafe-inline' to default-src
+    http://stackoverflow.com/questions/29814717/getting-error-to-setup-ngcordova-firsttime
+    https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    http://stackoverflow.com/questions/30212306/no-content-security-policy-meta-tag-found-error-in-my-phonegap-application
+    http://forum.ionicframework.com/t/ionic-google-maps-referenceerror-google-is-not-defined/22550/3
+
+    NOTE: this article uses a different meta-tag:
+        http://www.gajotres.net/using-cordova-geoloacation-api-with-google-maps-in-ionic-framework/
+    NAMELY, as follows:
+        <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' * data: gap: https://ssl.gstatic.com https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+  <title></title>
+
+  <!-- NOTE: the build-endbuild tags are used by gulp-htmlreplace - DO NOT REMOVE -->
+  <!-- build:sass -->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!-- endbuild -->
+</head>
+
+<!-- NOTE: "ng-strict-di" will be added to the body tag during a production build (see gulp.js) -->
+<body ng-app="app" >    <!-- ng-controller="ApplicationCtrl as main" ApplicationCtrl: global/default controller -->
+  <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable header-bar-fonts">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+      
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="openSideMenu()" ng-show="showSideMenu" ></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right" ng-cloak>
+        <div class="lang-container" ng-click="switchLang()">
+          <span ng-class="{inactive: !selectedLang.en }"> ENG </span>
+          <span ng-class="{inactive: !selectedLang.bm }"> BM </span>
+        </div>
+        <div class="logout" ng-show='showLogout'>
+          <div class='div-sperator'></div>
+          <button class="button button-clear" ng-click="logout()" >LOGOUT</button>
+        </div>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+  <ion-nav-view></ion-nav-view>
+  
+  <!--
+      For DEV we can use ionic.bundle.js (non-minified) to debug moduleErr errors, see:
+      http://www.chrisgmyr.com/2014/08/debugging-uncaught-error-injectormodulerr-in-angularjs/
+
+      During a production build, this gets swapped out for the minified version (ionic.bundle.min.js).
+  -->
+  <!-- NOTE: the build-endbuild tags are used by gulp-htmlreplace - DO NOT REMOVE -->
+  <!-- build:ionic -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <!-- endbuild -->
+
+  <!-- Form validation with ng-messages and fusion-messages -->
+  <script src="lib/angular-messages/angular-messages.min.js"></script>
+  <script src="lib/fus-messages/dist/fus-messages.js"></script>
+  <script src='lib/checklist-model/checklist-model.js'></script>
+  <!-- Translation -->
+  <script src="lib/angular-translate/angular-translate.min.js"></script>
+  <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+
+  <!-- Libraries -->
+  <script src="lib/ng-idle/angular-idle.min.js"></script>
+  <script src="lib/lodash/dist/lodash.min.js"></script>
+  <script src="lib/moment/moment.js"></script>
+  <script src="lib/numeral/min/numeral.min.js"></script>
+  <script src="lib/crypto-js/crypto-js.js"></script>
+  <script src="lib/async/dist/async.min.js"></script>
+  <script src="lib/signature_pad/signature_pad.min.js"></script>
+  <!-- ngCordova - IMPORTANT : SHOULD be after ionic bundle and before cordova.js -->
+  <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+  <!-- Cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <script src="lib/chart.js/dist/Chart.min.js"></script>
+  <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+  <script src="lib/jspdf/dist/jspdf.debug.js"></script>
+  <script src="js/modules/html2pdf.js"></script>
+
+  <!-- NOTE: the build-endbuild tags are used by gulp-htmlreplace - DO NOT REMOVE -->
+  <!-- build:js -->
+
+  <!-- scripts belonging to the root "app" module are placed here -->
+  <script src="js/app/app.js"></script>
+  <script src="js/app/appCtrl.js"></script>
+  <script src="js/app/appService.js"></script>
+
+  <script src="js/configs/appMeta.js"></script>
+  <script src="js/configs/routes.js"></script>
+  <script src="js/configs/serverUrls.js"></script>
+  <script src="js/configs/configs.js"></script>
+  <script src="js/configs/const.js"></script>
+  
+  <script src="js/services/userService.js"></script>
+  <script src="js/services/populatedVluesService.js"></script>
+  <script src="js/services/StorageService.js"></script>
+  <script src="js/services/ResourcesService.js"></script>
+  <script src="js/services/BroadcastService.js"></script>
+  <script src="js/services/ModalService.js"></script>
+  <script src="js/services/TransactionsService.js"></script>
+  <script src="js/services/PolicyService.js"></script>
+  <script src="js/services/TransactionHistoryService.js"></script>
+  <script src="js/services/FundSwitchingService.js"></script>
+  <script src="js/app/transactions/cancelAutoDebit/CancelAutoDebitService.js"></script>
+  <script src="js/app/transactions/medicalCard/MedicalCardService.js"></script>
+  <script src="js/app/transactions/changePaymentCycle/ChangePaymentCycleService.js"></script>
+  <script src="js/app/transactions/topUp/TopUpService.js"></script>
+  <script src="js/services/TemplateService.js"></script>
+  <script src="js/app/transactions/changeAddress/ChangeAddressService.js"></script>
+  
+  <script src="js/app/login/loginCtrl.js"></script>
+  <script src="js/app/main/mainCtrl.js"></script>
+  <script src="js/app/setPassword/setPasswordCtrl.js"></script>
+  <script src="js/app/resetPassword/resetPasswordCtrl.js"></script>
+  <script src="js/app/transactionHistory/TransactionHistoryCtrl.js"></script>
+  <script src="js/app/search/PolicySerachCtrl.js"></script>
+  <script src="js/app/policyDashboard/policyDashboardCtrl.js"></script>
+  <script src="js/app/policyDetails/policyDetailsCtrl.js"></script>
+  <script src="js/app/transactions/payment/paymentCtrl.js"></script>
+  <script src="js/app/transactions/payment/PaymentService.js"></script>
+  <script src="js/app/transactions/medicalCard/MedicalCardCtrl.js"></script>
+  <script src="js/app/transactions/creditCard/CreditCardCtrl.js"></script>
+  <script src="js/app/transactions/changeAddress/ChangeAddressCtrl.js"></script>
+  <script src="js/app/transactions/cancelAutoDebit/CancelAutoDebitCtrl.js"></script>
+  <script src="js/app/transactions/changePaymentCycle/ChangePaymentCycleCtrl.js"></script>
+  <script src="js/app/transactions/reinstatement/giwl/GiwlCtrl.js"></script>
+  <script src="js/app/transactions/fundSwitching/FundSwitchingCtrl.js"></script>
+  <script src="js/app/transactions/directCredit/DirectCreditService.js"></script>
+  <script src="js/app/transactions/directCredit/DirectCreditCtrl.js"></script>
+  <script src="js/app/transactions/topUp/TopUpCtrl.js"></script>
+  <script src="js/app/transactions/reinstatement/MedicalExamination/MedicalExaminationCtrl.js"></script>
+  <script src="js/app/transactions/reinstatement/MedicalExamination/MedicalExaminationService.js"></script>
+
+
+  <script src="js/modules/ga.js"></script>
+  <script src="js/modules/aiaModules.js"></script>
+  <script src="js/modules/signature.js"></script>
+  <!-- endbuild -->
+
+  <!-- NOTE: the inject-endinject tags are used by gulp-inject - DO NOT REMOVE -->
+  <!-- inject:js -->
+
+  <script src="js/app/login/loginCtrl.js"></script>
+
+  <script src="js/app/main/mainCtrl.js"></script>
+
+  <script src="js/app/policyDashboard/policyDashboardCtrl.js"></script>
+
+  <script src="js/app/policyDetails/policyDetailsCtrl.js"></script>
+
+  <script src="js/app/resetPassword/resetPasswordCtrl.js"></script>
+
+  <script src="js/app/search/PolicySerachCtrl.js"></script>
+
+  <script src="js/app/setPassword/setPasswordCtrl.js"></script>
+
+  <script src="js/app/shared/DonutPieChart.js"></script>
+
+  <script src="js/app/transactionHistory/TransactionHistoryCtrl.js"></script>
+
+  <script src="js/app/transactions/cancelAutoDebit/CancelAutoDebitCtrl.js"></script>
+
+  <script src="js/app/transactions/cancelAutoDebit/CancelAutoDebitService.js"></script>
+
+  <script src="js/app/transactions/changeAddress/ChangeAddressCtrl.js"></script>
+
+  <script src="js/app/transactions/changeAddress/ChangeAddressService.js"></script>
+
+  <script src="js/app/transactions/changePaymentCycle/ChangePaymentCycleCtrl.js"></script>
+
+  <script src="js/app/transactions/changePaymentCycle/ChangePaymentCycleService.js"></script>
+
+  <script src="js/app/transactions/creditCard/CreditCardCtrl.js"></script>
+
+  <script src="js/app/transactions/directCredit/DirectCreditCtrl.js"></script>
+
+  <script src="js/app/transactions/directCredit/DirectCreditService.js"></script>
+
+  <script src="js/app/transactions/fundSwitching/FundSwitchingCtrl.js"></script>
+
+  <script src="js/app/transactions/medicalCard/MedicalCardCtrl.js"></script>
+
+  <script src="js/app/transactions/medicalCard/MedicalCardService.js"></script>
+
+  <script src="js/app/transactions/payment/PaymentService.js"></script>
+
+  <script src="js/app/transactions/payment/paymentCtrl.js"></script>
+
+  <script src="js/app/transactions/topUp/TopUpCtrl.js"></script>
+
+  <script src="js/app/transactions/topUp/TopUpService.js"></script>
+
+  <script src="js/app/transactions/reinstatement/MedicalExamination/MedicalExaminationCtrl.js"></script>
+
+  <script src="js/app/transactions/reinstatement/MedicalExamination/MedicalExaminationService.js"></script>
+
+  <script src="js/app/transactions/reinstatement/giwl/GiwlCtrl.js"></script>
+
+  <!-- endinject -->
+
+  <!-- ANGULAR-TEMPLATECACHE -->
+  <script src="js/modules/templates.js"></script>
+  
+</body>
+</html>

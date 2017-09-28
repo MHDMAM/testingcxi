@@ -1,0 +1,15 @@
+ion-modal-view
+  ion-header-bar.bar-stable
+    h1.title Add Signature
+  ion-content(scroll='false')
+    .card.list
+      .item.item-body Please use your finger or stylus to sign below
+      canvas#signature-canvas.padding-horizontal.item(style='width: 100%;   max-height: 200px;')
+      .item.item-checkbox
+        label.checkbox
+          input(type='checkbox', ng-model='signaturePadModel.signatureConfirm')
+        |          I accept the signature above
+    .button-bar.padding
+      button.button(ng-click='clear(); signatureModal.hide()') Cancel
+      button.button(ng-click='clear()') Clear
+      button.button.button-stable(ng-disabled='!(signaturePadModel.signatureConfirm && signature)', ng-click='save()') Accept

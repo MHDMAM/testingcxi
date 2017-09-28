@@ -1,0 +1,18 @@
+.progress-container
+  .progress-line
+    .line.line-3
+      .progress-50
+
+    .stage.stage-3(ng-class="{current:steps===1, completed:steps!==1}")
+      span.step-number(ng-if='steps==1') 1
+      span.step-number.ion-checkmark(ng-if='steps!=1')
+      .step-label
+
+    .stage.stage-3(ng-class="{current:steps===2, completed:steps===3}")
+      span.step-number(ng-if='steps!=3') 2
+      span.step-number.ion-checkmark(ng-if='steps==3')
+      .step-label
+
+    .stage.stage-3(ng-class="{current:steps===3}")
+      span.step-number 3
+      .step-label

@@ -1,0 +1,13 @@
+.row.margin-bottom-medium
+  .col-90.center-block.has-border-padding
+    h3(translate='transactions.changeAddress.step3.section1.title')
+    .row
+      .col-90
+        ion-slide-box
+          ion-slide(ng-repeat='group in viewData.selectedPolicies2 track by $index')
+            .slide-container
+              .row
+                ul.bullet-list
+                  li(ng-repeat='policy in group') 
+                    span.font-bold {{policy.planName}}, &nbsp;
+                    span {{policy.policyNo}}, &nbsp; {{policy.insuredName}}                

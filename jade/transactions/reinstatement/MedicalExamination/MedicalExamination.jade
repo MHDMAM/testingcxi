@@ -1,0 +1,28 @@
+ion-view(view-title="{{'transactions.reinstatement.title' | translate}}")
+  ion-content.page-padding
+    .center.margin-bottom-xl
+      h2(translate='transactions.reinstatement.medicalExam.title')
+
+    .row
+      .col-90.center-block.has-border-padding.medical-thumb-container
+        .clock.medical-thumb(ng-repeat='pic in data.pics track by $index', ng-click='previewPic($index)')
+          div
+            img(ng-src='{{pic}}')
+        .clock.medical-take-photo(ng-click='scanDoc()')
+          img(src='img/camera.svg')
+          h3(translate='transactions.reinstatement.medicalExam.take_photo')
+
+    div.agree-checkbox.margin-bottom-xl.margin-top-medium
+      form.checkbox-display-with-terms(name='ccConfirmForm')
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox' name='readTnc', ng-model='data.readTnc', required) 
+          span(translate='transactions.read_tnc1') &nbsp;
+        span.inline-link(ng-click='termsNconditions()')  {{'transactions.read_tnc2' | translate}}
+        //- | &nbsp; agreement.
+
+
+
+    .row
+      .col.center
+        button.button.button-major.button-wide(ng-click='payment()', translate='transactions.reinstatement.medicalExam.make_payment', ng-disabled='data.pics.length==0 || !data.readTnc')

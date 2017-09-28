@@ -1,0 +1,59 @@
+#crsSelfCertNo(ng-if='steps === "crsNo"')
+  //- customer details
+  .row
+    .col-90.center-block
+      .form-container
+        h3(translate='transactions.changeAddress.crs.fatcaW9.step1.acc_holder_details')
+      .row
+        .col
+        .row.has-border-padding.margin-bottom-large
+          .col-50.padding-right-medium
+            .row
+              .col
+                .pol-value(translate='transactions.changeAddress.crs.account_holder_name')
+                .pol-property {{data.policyOwnerInfo.name}}
+          .col-50.padding-right-medium
+            .row
+              .col
+                .pol-value(translate='transactions.changeAddress.crs.policy_no')
+                .pol-property {{data.policyOwnerInfo.policyNo}}
+          h3.margin-top-medium(translate='transactions.changeAddress.crs.title2')
+          .pol-value(translate='transactions.changeAddress.crs.Reasonable_Explanation')
+      span.pol-value.margin-bottom-medium(translate='transactions.changeAddress.crs.select_reason')      
+      //- form(name='crsNoForm')
+      .row.margin-top-medium
+        //- ion-content
+        div
+          .row.margin-bottom-medium
+            label.radio-button
+              input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"A"', required)
+              span.indicator
+              span(translate='transactions.changeAddress.crs.no.reason1')
+          .row.margin-bottom-medium
+            label.radio-button
+              input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"B"', required)
+              span.indicator
+              span(translate='transactions.changeAddress.crs.no.reason2')
+          .row.margin-bottom-medium
+            label.radio-button
+              input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"C"', required)
+              span.indicator
+              span(translate='transactions.changeAddress.crs.no.reason3')
+          .row.margin-bottom-medium
+            label.radio-button
+              input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"D"', required)
+              span.indicator
+              span(translate='transactions.changeAddress.crs.no.reason4')
+          .row.margin-bottom-medium
+            label.radio-button
+              input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"E"', required)
+              span.indicator
+              span(translate='transactions.changeAddress.crs.no.reason5')
+          .row.margin-bottom-medium
+            .col
+              label.radio-button
+                input(type='radio', name='reason', ng-model='crs.no.reason', ng-value='"F"', required)
+                span.indicator
+                span(translate='transactions.changeAddress.crs.no.reason6')
+                label.item.item-input.input-margin
+                  textarea(placeholder='Please explain', rows=5, ng-model='crs.no.othersReason', ng-required="crs.no.reason === 'F'")

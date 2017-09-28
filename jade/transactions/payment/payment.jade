@@ -1,0 +1,9 @@
+ion-view(view-title="{{'payment.make.title' | translate}}", hide-nav-bar="steps===4")
+  ion-content.page-padding(scroll="false")
+
+    include ../../shared/stepper-3
+
+    include payment-step-1
+    include payment-step-2
+    include payment-step-3
+    include online

@@ -1,0 +1,14 @@
+ion-modal-view.general-modal
+  ion-header-bar.bar-stable
+    h1.title {{_viewData.title}}
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .content
+      .center-block(style=' margin-top: -30px;')
+        h4(ng-if='_viewData.header') {{_viewData.header}}
+      span {{_viewData.template}}
+
+    .row
+      .col
+        button.center-block.button.button-major.button-wide(ng-click='closeModal()') Close

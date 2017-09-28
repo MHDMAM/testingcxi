@@ -1,0 +1,76 @@
+ion-view(view-title="{{'policyDashboard.title' | translate}}")
+  ion-content
+
+    .welcome-note
+      h3 {{viewData.policyOwner.name}}
+
+
+
+      .icons.vertical-center
+        svg.icon-s.icon-24(role='img', title='messagealt-2nd')
+          use(xmlns:xlink='http://www.w3.org/1999/xlink', xlink:href='img/icons.svg#messagealt-2nd')
+        span {{viewData.policyOwner.email || 'N/A'}} 
+        span &nbsp;&nbsp; • &nbsp;&nbsp; 
+        svg.icon-s.icon-24(role='img', title='talkagent-2nd')
+          use(xmlns:xlink='http://www.w3.org/1999/xlink', xlink:href='img/icons.svg#talkagent-2nd')
+        span {{viewData.policyOwner.mobileNo || 'N/A'}}
+    
+    .clearfix
+      .dashboard-filter-container
+        label.item.item-input.selectArrow
+          select.formInput(name='filter', ng-model='filters.filter', ng-options='obj.value as obj.key for obj in populatedVals.filter')
+            option(value='', translate="policyDashboard.filter") 
+       
+        div.pol-search
+          label.item.item-input
+            input(type='search', name='search', ng-click='search()', ng-model='filters.search', placeholder="{{'policyDashboard.search' | translate}}", maxlength='50')
+            .button.button-clear
+              i.icon.ion-search.placeholder-icon
+
+
+    
+    div
+      .row.dashboard-policy-container
+        ion-slide-box.slider-card
+          ion-slide(ng-repeat='group in viewData.policyRecord.policyInfo')
+            .slide-container
+              .row
+                .col-50.policy-item-container(ng-repeat='plan in group track by $index', ng-click='goDetails()')
+                  //- .clock.col.policy-item.card(ng-class="{'life-color': plan.role ==='LifeAssured'}")
+                  .clock.col.policy-item.card.life-color
+                    .row.policy-item-header
+                      .policy-item-icon
+                        svg.icon-s(role='img' title='lifepro-prime1')
+                          use(xlink:href='img/icons.svg#lifepro-prime1')
+                      .policy-item-title
+                        .pol-titlle {{plan.planName}}
+                        span.pol-value {{plan.lineOfBiz | lineofbiztotext}}
+
+                      .glyph-arrow
+                        svg.icon-arrow(role='img' title='#')
+                          use(xlink:href='img/icons.svg#arrow-2ndg')
+
+                    .row.policy-item-body
+                      .row
+                        .col
+                          span.pol-value(translate='takaful.policy_no', ng-if="plan.lineOfBiz ==='LAFT'")
+                          span.pol-value(translate='policyDashboard.policy_no', ng-if="plan.lineOfBiz !=='LAFT'")
+                          span.pol-value.font-bold {{plan.policyNo}}
+                      .row
+                        .col
+                          span.pol-value(translate='takaful.policy_status', ng-if="plan.lineOfBiz ==='LAFT'")
+                          span.pol-value(translate='policyDashboard.policy_status',  ng-if="plan.lineOfBiz !=='LAFT'")
+                          span.pol-value.font-bold {{plan.policyStatus}}
+                      .row
+                        .col
+                          span.pol-value(translate='policyDashboard.insured_name')
+                          span.pol-value.font-bold {{plan.insuredName}}
+                      .row    
+                        .col
+                          span.pol-value(translate='policyDashboard.policy_premium_due_date')
+                          span.pol-value.font-bold {{plan.premiumDueDate | aiadate}}
+                      .row  
+                        .col
+                          span.pol-value(translate='takaful.policy_due_amount', ng-if="plan.lineOfBiz ==='LAFT'")
+                          span.pol-value(translate='policyDashboard.policy_due_amount', ng-if="plan.lineOfBiz !=='LAFT'")
+                          span.pol-value.font-bold RM{{plan.premiumAmount}}

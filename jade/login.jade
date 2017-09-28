@@ -1,0 +1,44 @@
+ion-view(view-title="{{'login.title' | translate}}")
+  ion-content
+
+
+    //- .branding 
+    //-   .cx
+    .branding
+
+    .loginBox
+      h1(translate='login.customer_express')
+      h2(translate='login.title')
+      .card-padding.padding-top-none
+        .form-container
+          form(name='loginForm')
+            label.item.item-input.input-margin(ng-class="{'form-error-input':loginForm.staffId.$dirty && !loginForm.staffId.$valid}")
+              input(type='text', name='staffId', ng-model='data.staffId', placeholder="{{'login.staff_id' | translate}}", aia-staffid, required)
+            .error-container(ng-messages='loginForm.staffId.$error', ng-if="loginForm.staffId.$dirty")
+              small.error(ng-message='required', translate='login.msgs.Staff_Id_is_required')
+
+            label.item.item-input.input-margin(ng-class="{'form-error-input':loginForm.password.$dirty && !loginForm.password.$valid}")
+              input(type='password', name='password', ng-model='data.password', placeholder="{{'login.password' | translate}}", required)
+            .error-container(ng-messages='loginForm.password.$error', ng-if="loginForm.password.$dirty")
+              small.error(ng-message='required', translate='login.msgs.password_is_required')
+
+            
+             button.button.button-stable.button-full.button-major(type='submit', ng-click='signIn()', translate='login.login', ng-disabled='loginForm.$invalid')
+
+          
+    .loginBox
+      .row.padding-top-none.margin-bottom-medium.margin-top-xl
+        span.inline-link(translate='login.forgot_password', ng-click='forgotPW()')
+      .row
+        span.inline-link(translate='login.activate', ng-click='activate()')
+        //- .col-50(style='border-right: solid 1px #dbdad4')
+        //-   span(translate='login.forgot_password')
+        //-   button.button.button-calm.button-clear.button-major.no-padding(ng-click='forgotPW()', translate='login.forgot_password2')
+        //- .col-50
+        //-   span Account not Activated? 
+        //-   button.button-major.button.button-calm.button-clear.button-major.no-padding(ng-click='activate()', translate='login.activate2')
+
+
+    .loginBox.uuid-style
+      div {{viewData.uuid}}
+      div v{{viewData.appVersion}}

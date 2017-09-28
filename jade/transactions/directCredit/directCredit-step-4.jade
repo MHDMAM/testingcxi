@@ -1,0 +1,31 @@
+#step4(ng-if='steps===4')
+  .center.margin-bottom-xl
+    h2(translate='transactions.dc.step4.title')
+
+  .full-bleed.status-message.margin-bottom-medium
+    div.status-text-block.margin-bottom-xs
+      span(translate="transactions.dc.step4.transact_status")
+      span.status-success(ng-if='viewData.success === true', translate="transactions.dc.step4.transact_success")
+      span.status-fail(ng-if='viewData.success === false', translate="transactions.dc.step4.transact_failed")
+    span.pol-value(translate='transactions.dc.step4.confirmation')
+
+  .row
+    .col.center-block
+       include top-row
+  .row
+    .col-90.center-block
+      h3(translate='transactions.dc.step4.form_title')
+      ion-slide-box.slider-card(on-slide-changed='slideHasChanged($index)')
+        ion-slide(ng-repeat='group in viewData.selectedPolicies2')
+          .slide-container
+            .row
+              ul.bullet-list
+                li(ng-repeat='item in group') 
+                  span.font-bold {{item.planName}}, &nbsp;
+                  span {{item.policyNo}}, &nbsp; {{item.insuredName}}
+
+      //- nav buttons
+      .center
+        button.button.button-major.button-wide.margin-top-large(ng-click='close()', translate=' transactions.dc.back_to_dashboard')
+
+

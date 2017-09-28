@@ -1,0 +1,28 @@
+#step1(ng-if='steps===1')
+  .center.margin-bottom-xl
+    h2(translate='transactions.medcard_replacement.page1_title')
+
+  .row
+    .col-90.center-block
+      h3(translate='transactions.medcard_replacement.policy_selection_title') 
+      include card-replacement-policy-header
+      
+      h3.margin-bottom-large(translate='transactions.medcard_replacement.candicate_selection_title')
+
+      //- grid layout for candidate list
+      .form-container
+        form(name='medCardCandidateForm')
+          div(ng-repeat='item in data.coveredMember track by $index')
+            .row(ng-if='$even')
+              .col-50(ng-if='data.coveredMember[$index]')
+                .item.item-checkbox
+                  label.checkbox 
+                    input(type='checkbox', name='candidate_{{item.id}}', ng-model='item.isSelected', checklist-model='viewData.selectedCandidates', checklist-value='item', checklist-change='onChange($index)', required, ng-checked='item.isSelected')
+                  | {{item.name}}
+              .col-50(ng-if='data.coveredMember[$index +1]', ng-init='item2 = data.coveredMember[$index +1]')
+                .item.item-checkbox
+                  label.checkbox 
+                    input(type='checkbox', name='candidate_{{item2.id}}', ng-model='item2.isSelected', checklist-model='viewData.selectedCandidates', checklist-value='item2', checklist-change='onChange($index +1)', ng-checked='item2.isSelected' required)
+                  | {{item2.name}}
+            
+  button.center-block.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.medcard_replacement.next', ng-disabled='viewData.selectedCandidates.length === 0')

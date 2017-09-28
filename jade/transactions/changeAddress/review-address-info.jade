@@ -1,0 +1,26 @@
+.row.has-border-padding.margin-bottom-small
+  .col-33.padding-right-medium
+    .pol-value(translate='transactions.changeAddress.step1.address') 
+    .pol-property.display-block {{data.addressInfo.address1}}
+    .pol-property.display-block {{data.addressInfo.address2}}
+    .pol-property.display-block {{data.addressInfo.address3}}
+    .pol-property.display-block(ng-if='data.addressInfo.country==="MAL"') {{data.addressInfo.postCode||data.addressInfo.postcode}}, {{data.addressInfo.state}}, {{data.addressInfo.country | countrykey}}
+    .pol-property.display-block(ng-if='data.addressInfo.country !=="MAL"') {{data.addressInfo.country | countrykey}}
+  .col-67.padding-right-medium
+    .row.margin-bottom-small
+      .col-50
+        .pol-value(translate='transactions.changeAddress.step1.email')
+        .pol-property {{data.policyOwnerInfo.newEmail}}
+
+      .col-50
+        .pol-value(translate='transactions.changeAddress.step1.mobile_no')
+        .pol-property(ng-show='data.policyOwnerInfo.newMobile') {{data.countryMobileCode.callingCode}} {{data.policyOwnerInfo.newMobile}}
+
+    .row
+      .col-50
+        .pol-value(translate='transactions.changeAddress.step1.home_no')
+        .pol-property(ng-show='data.policyOwnerInfo.homeNo') {{data.countryHomeCode.callingCode}} {{data.policyOwnerInfo.homeNo}}
+
+      .col-50
+        .pol-value(translate='transactions.changeAddress.step1.office_no')
+        .pol-property(ng-show='data.policyOwnerInfo.officeNo') {{data.countryOfficeCode.callingCode}} {{data.policyOwnerInfo.officeNo}}

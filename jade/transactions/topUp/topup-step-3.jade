@@ -1,0 +1,31 @@
+#step3(ng-if='steps===3')
+  .center.margin-bottom-xl
+    h2(translate='transactions.topup.tilte_step3')
+
+  include topup-confirm-content
+
+  
+
+    //- verification
+  .full-bleed.margin-bottom-large
+    .row
+      .col-90.center-block
+        .form-container      
+          span.pol-value {{'transactions.dc.step3.enter_vcode_title' | translate}} {{viewData.userInfo.mobileNo | phonemask}}
+          span.pol-value(translate='transactions.dc.step3.enter_vcode_title2')
+            
+          form.verification-block(name='step3Form')       
+            label.item.item-input.margin-bottom-small.margin-top-small
+              input.center-block(type='number', ng-model='data.verificationCode' placeholder="Enter verification code", translate='transactions.dc.step3.resend_code', required, minlength='6', maxlength='6')
+            
+            button.button.button-calm.button-wide.button-major(ng-click='requestOTP()', translate='transactions.dc.step3.resend_code')
+
+
+
+
+  .row
+    .col
+      .center-buttons
+        button.button.button-calm.button-wide.button-major(ng-click='cancel()', translate='transactions.topup.cancel')
+
+        button.button.button-major.button-wide(ng-click='submit()', translate='transactions.topup.confirm', ng-disabled='step3Form.$invalid')

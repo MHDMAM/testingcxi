@@ -1,0 +1,62 @@
+#step2.ng-enter(ng-if='steps===2')
+  .center.margin-bottom-xl
+    h2(translate='transactions.changePaymentCycle.step2.edit')
+    //- span.block(translate='transactions.changePaymentCycle.step2.wording')
+
+  .row
+    .col-90.center-block
+      h3(translate='transactions.changePaymentCycle.step2.title1')
+      .row.has-border-padding.margin-bottom-large
+        .col-50.padding-right-medium
+          .row.margin-bottom-small
+            .col
+              .pol-value(translate='transactions.changePaymentCycle.policy_name')
+              .pol-property {{data.mainPolicyInfo.planName}}
+          .row
+            .col
+              .pol-value(translate='transactions.changePaymentCycle.insured_name')
+              .pol-property {{data.mainPolicyInfo.insuredName}}
+          //- .row
+          //-   .col
+          //-     .pol-value(translate='transactions.changePaymentCycle.new_premium_amount')
+          //-     .pol-property {{data.mainPolicyInfo.new_premium_amount}}
+          
+        .col-50.padding-right-medium
+          .row.margin-bottom-small
+            .col
+              .pol-value(ng-if="data.mainPolicyInfo.lineOfBiz ==='LAFT'", translate='takaful.policy_no')
+              .pol-value(ng-if="data.mainPolicyInfo.lineOfBiz !=='LAFT'", translate='transactions.changePaymentCycle.policy_no')
+              .pol-property {{data.mainPolicyInfo.policyNo}}
+          .row
+            .col
+              .pol-value(translate='transactions.changePaymentCycle.new_payment_cycle')
+              .pol-property {{viewData.selectedFreqDesc}}
+              
+
+  .full-bleed.margin-bottom-xl
+    .col-90.center-block
+      p {{'transactions.changePaymentCycle.step2.enter_vcode_title' | translate}} 
+        span.font-bold {{data.clientDetails.mobileNo   | phonemask }}
+      | {{'transactions.changePaymentCycle.step2.enter_vcode_title2' | translate}}
+      //- verification code
+      form.verification-block(name='cycleStep2Form')
+
+        label.item.item-input.margin-bottom-small.margin-top-small
+          input.center-block(type='tel', ng-model='data.verificationCode' placeholder="Enter verification code", translate='transactions.medcard_replacement.resend_code', minlength='6', maxlength='6', required)
+        
+        button.button.button-major.button-wide.button-calm(ng-click='requestOTP()', translate='transactions.medcard_replacement.resend_code', required)
+
+        .checkbox-display-with-terms
+              div.agree-checkbox.margin-top-medium.margin-bottom-medium
+                li.item.item-checkbox
+                  label.checkbox
+                    input(type='checkbox', name='tnc', ng-model='tncChecked', required)
+                  span {{'transactions.changePaymentCycle.tc.read_tnc1' | translate}}&nbsp;
+                  span.inline-link(translate='transactions.changePaymentCycle.tc.read_tnc2', ng-click='changePaymentCycTnC()') 
+
+  .row
+    .col
+      .center-buttons
+        button.button.button-calm.button-wide.button-major(ng-click='cancel()', translate='transactions.changePaymentCycle.cancel')
+
+        button.button.button-major.button-wide(ng-click='submit()', translate='transactions.changePaymentCycle.confirm', ng-disabled='cycleStep2Form.$invalid')

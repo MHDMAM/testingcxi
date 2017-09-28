@@ -1,0 +1,41 @@
+#step2.ng-enter(ng-if='steps===2')
+
+  .container
+    .status-indicator-bar.margin-bottom-xxs(ng-if="crs.selectedStep")
+      .wrapper.center-block
+        div
+          span(translate="transactions.changeAddress.step2.indiv_self_certification_complete")
+        div.major-link.blue.pull-right(ng-click="updateState_edit(crs.selectedStep)")
+          span(translate='transactions.topup.edit')
+          span.ion-edit 
+    .status-indicator-bar.margin-bottom-xxs(ng-if="fatca.selectedStep")
+      .wrapper.center-block
+        div
+          span(translate="transactions.changeAddress.step2.indiv_fatca_completed")
+        div.major-link.blue.pull-right(ng-click="updateState_edit(fatca.selectedStep)")
+          span(translate='transactions.topup.edit')
+          span.ion-edit 
+  .row
+    .col-90.center-block
+      h3(translate='transactions.changeAddress.step2.details')
+
+      include review-address-info
+      //- select policies
+      .row
+        .col
+          h3(translate='transactions.changeAddress.step2.select_policy_title')
+          ion-slide-box.slider-card(on-slide-changed='slideHasChanged($index)', active-slide='viewData.selectedIndexStep2')
+            ion-slide(ng-repeat='group in data.splitPolicyInfo')
+              .slide-container
+                .row
+                  .clock.col-50(ng-repeat='item in group')
+                    .item.item-checkbox
+                      label.checkbox 
+                        input(type='checkbox', name='policy{{item.policyNo}}', ng-model='item', checklist-model='viewData.selectedPolicies', checklist-value='item', ng-checked='{{item.selected}}', ng-change='updateSelections()')
+                      span.pol-property {{item.planName}}
+                      span.pol-value(ng-if="item.lineOfBiz ==='LAFT'") {{ 'takaful.policy_no'| translate}}: {{item.policyNo}}
+                      span.pol-value(ng-if="item.lineOfBiz !=='LAFT'") {{ 'transactions.changeAddress.step2.policy_no'| translate}}: {{item.policyNo}}
+                      span.pol-value {{ 'transactions.changeAddress.step2.insured_name'| translate}}: {{item.insuredName}}
+      .clearfix 
+          span.pol-value.font-bold(translate='transactions.changeAddress.notes') |
+          p(translate='transactions.changeAddress.notes_txt')

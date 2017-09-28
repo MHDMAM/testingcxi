@@ -1,0 +1,25 @@
+ion-view(view-title='{{viewData.title}}')
+  ion-content(style='margin-top: 100px')
+    //- .loginBox
+    //-   .card-padding.padding-top-none.margin-top-medium
+    .row
+      .col-80.center-block
+        .form-container
+          .row.has-border-padding
+            .col-25
+              span.col-value.font-bold(translate='transactionHistory.policy_owner')
+            .col-25
+              span.col-value.font-bold(translate='transactionHistory.transaction_id')
+            .col-25
+              span.col-value.font-bold(translate='transactionHistory.transaction_type')
+            .col-25
+              span.col-value.font-bold(translate='transactionHistory.date_submitted')
+          .row.has-border-padding.padding-top-10(ng-repeat='item in data.history')
+            .col-25
+              span.col-value {{item.policyOwner}}
+            .col-25
+              span.col-value {{item.transactionId}}
+            .col-25
+              span.col-value {{item.transactionType}}
+            .col-25
+              span.col-value {{item.dateSubmitted}}

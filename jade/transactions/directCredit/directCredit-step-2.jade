@@ -1,0 +1,23 @@
+#step2(ng-if='steps===2')
+  .center.margin-bottom-xl
+    h2(translate='transactions.dc.step2.title')
+
+  include top-row
+  //- selected policies in pagination
+  .row
+    .col-90.center-block
+      h3(translate='transactions.dc.step2.form_title')
+      ion-slide-box.slider-card
+        ion-slide(ng-repeat='group in viewData.splitPolicyInfo')
+          .slide-container
+            .row
+              .clock.col-50(ng-repeat='item in group')
+                .item.item-checkbox
+                  label.checkbox 
+                    input(type='checkbox', name='policy{{item.policyNo}}', ng-model='item', checklist-model='viewData.selectedPolicies', checklist-value='item', ng-checked='{{item.selected}}', ng-change='updateSelections()')
+                  span.pol-property {{item.planName}}
+                  span.pol-value(ng-if="item.lineOfBiz !=='LAFT'") {{ 'transactions.dc.policy_no'| translate}} {{item.policyNo}} 
+                  span.pol-value(ng-if="item.lineOfBiz ==='LAFT'") {{ 'takaful.policy_no'| translate}} {{item.policyNo}} 
+                  span.pol-value.text-wrap {{ 'transactions.dc.person_covered'| translate}}: {{item.insuredName}}
+
+  button.center-block.button.button-major.button-wide(ng-click='updateState(3)', translate='transactions.dc.next', ng-disabled='viewData.selectedPolicies.length === 0')

@@ -1,0 +1,36 @@
+.row.margin-bottom-medium
+  .col-90.center-block
+    h3(translate="transactions.changeAddress.step3.section2.title")
+    .row.has-border-padding.margin-bottom-small.has-border-padding
+      .col-50.padding-right-medium
+        .pol-value(translate="transactions.changeAddress.step3.section2.name_of_account_holder")
+        .pol-property.display-block {{data.policyOwnerInfo.name}}
+      //- .col-50.padding-right-medium 
+      //-   .pol-value(translate="transactions.changeAddress.step3.section2.place_of_birth")
+      //-   .pol-property.display-block {{w8.ownerDetails.citizenshipCountry}}
+      .col-50.padding-right-medium 
+        .pol-value(translate="transactions.changeAddress.step3.section2.declaration_date")
+        .pol-property.display-block {{fatca.newSubmitionDate}}
+    //- Change to a repeater. coming from crs
+    .row.has-border-padding.margin-bottom-small.has-border-padding(ng-repeat='item in crs.yes.crsList track by $index')
+      .row.has-border-padding.margin-bottom-small
+        .col-50.padding-right-medium
+          .pol-value(translate="transactions.changeAddress.step3.section2.country_of_residence")
+          .pol-property.display-block {{item.country.country}}
+        .col-50.padding-right-medium 
+          .pol-value(translate="transactions.changeAddress.step3.section2.tax_payer_id_no")
+          .pol-property.display-block {{item.tin || 'Not Available'}}
+      .row.has-border-padding.margin-bottom-small
+        .col.padding-right-medium
+          .pol-value.pol-value(translate='transactions.changeAddress.crs.reason')
+          div(ng-switch='item.tinreason')
+            .pol-property.display-block(ng-switch-when='A', translate='transactions.changeAddress.crs.yes.reason1')
+            .pol-property.display-block(ng-switch-when='B') {{item.othersReason}}
+            .pol-property.display-block(ng-switch-when='C', translate='transactions.changeAddress.crs.yes.reason3')
+            .pol-property.display-block(ng-switch-default) 'N/A'
+    .row.has-border-padding.margin-bottom-small(ng-if='crs.no.reasonDes')
+      .col.padding-right-medium
+        .pol-value.pol-value(translate='transactions.changeAddress.crs.title2')
+        .pol-property.display-block(ng-if='crs.no.reasonDes') {{crs.no.reasonDes}}
+        
+

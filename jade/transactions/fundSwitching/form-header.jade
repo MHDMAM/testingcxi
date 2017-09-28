@@ -1,0 +1,26 @@
+h3(translate='transactions.fs.form_header_title')
+.row.has-border-padding.margin-bottom-large
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.fs.policy_name')
+        .pol-property {{data.policyInfo.planName}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='takaful.policy_no', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+        .pol-value(translate='transactions.fs.policy_no', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+        .pol-property {{data.policyInfo.policyNo}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.fs.insured_name')
+        .pol-property {{data.policyInfo.insuredName}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='takaful.policy_due_amount', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+        .pol-value(translate='transactions.fs.premium_amount', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+        .pol-property RM{{data.policyInfo.premiumAmount}}
+        span.pol-value {{'policyDetails.inclusive_of_gst_paid1' | translate}} RM{{data.policyInfo.gstAmount}}
+        span.pol-value {{'policyDetails.inclusive_of_gst_paid2' | translate}} {{viewData.freqDesc}}

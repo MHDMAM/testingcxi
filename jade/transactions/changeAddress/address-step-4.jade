@@ -1,0 +1,32 @@
+#step4.ng-enter(ng-if='steps===4')
+
+  .full-bleed.status-message.margin-bottom-medium
+    div.status-text-block.margin-bottom-xs
+      //- span.status-success(translate='transactions.changeAddress.step4.submit_success') 
+      span(translate="transactions.changeAddress.step4.transact_status")
+      span.status-success(ng-if='viewData.success === true', translate="transactions.changeAddress.submit_success")
+      span.status-fail(ng-if='viewData.success === false', translate="transactions.changeAddress.submit_failed")
+    span.pol-value(translate='transactions.changeAddress.step4.confirmation')
+
+  //- contact details
+  .row
+    .col-90.center-block
+      h3(translate='transactions.changeAddress.step4.details')
+
+      include review-address-info
+      
+  //- selected policies in pagination
+  .row
+    .col-90.center-block
+      h3 THIS UPDATE WILL APPLY FOR THE FOLLOWING:
+      ion-slide-box.slider-card(on-slide-changed='slideHasChanged($index)', active-slide='viewData.selectedIndexStep3')
+        ion-slide(ng-repeat='group in viewData.selectedPolicies2 track by $index')
+          .slide-container
+            .row
+              ul.bullet-list
+                li(ng-repeat='policy in group') 
+                  span.font-bold {{policy.planName}}, &nbsp;
+                  span {{policy.policyNo}}, &nbsp; {{policy.insuredName}}
+
+  include verification-step2
+  include verification-step3                  

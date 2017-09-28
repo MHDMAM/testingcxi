@@ -1,0 +1,60 @@
+#step3.ng-enter(ng-if='steps===3')
+  .center.margin-bottom-xl
+    h2(translate='transactions.medcard_replacement.page3_title')
+    //- span.pol-value(translate='transactions.medcard_replacement.page1_desc')
+
+
+  .row
+    .col-90.center-block.null-row-padding
+      include card-replacement-policy-header
+
+      .col
+        .row
+          .col-67
+            h3(translate='transactions.medcard_replacement.requested_members')
+            
+            //- candidate list
+            ul.bullet-list
+              li(ng-repeat='candidate in viewData.selectedCandidates') {{candidate.name}}
+
+          .col-33
+            .h3(translate='transactions.medcard_replacement.to_be_delivered_to')
+            span.pol-value {{data.addressInfo.address1}}
+            span.pol-value {{data.addressInfo.address2}}
+            span.pol-value {{data.addressInfo.address3}}
+            span.pol-value {{data.addressInfo.postCode}}, {{data.addressInfo.state}}, {{viewData.countryObj.country}}
+
+
+  .full-bleed.margin-bottom-large.margin-top-medium
+    .row
+      .col-90.center-block
+        .form-container
+          span(translate='transactions.medcard_replacement.enter_vcode_title') 
+          span &nbsp;
+          span.font-bold {{data.policyOwnerInfo.mobileNo | phonemask}}
+          span.pol-value(translate='transactions.medcard_replacement.enter_vcode_title2')
+          
+          //- verification code
+          form.verification-block(name='medCardVerificationForm')
+            label.item.item-input.margin-bottom-small.margin-top-small
+              input.center-block(type='text', ng-model='data.verificationCode' placeholder="Enter verification code", translate='transactions.medcard_replacement.resend_code', minlength='6', maxlength='6', required)
+            
+            button.button.button-major.button-wide.button-calm(ng-click='requestOTP()', translate='transactions.medcard_replacement.resend_code', required)
+      
+
+          //- tnc agreet checkbox
+          form.checkbox-display-with-terms(name='medCardTncForm')
+            div.agree-checkbox.margin-top-medium
+              li.item.item-checkbox
+                label.checkbox
+                  input(type='checkbox', ng-model='item.actions.loanSelected', ng-change="calcTotal('loan')", required)
+                span {{'transactions.medcard_replacement.read_tnc1' | translate}}&nbsp;
+              span.inline-link(translate='transactions.medcard_replacement.read_tnc2', ng-click='termsNconditions()') 
+              //-| &nbsp; {{'transactions.medcard_replacement.read_tnc3' | translate}}
+
+  .row
+    .col
+      .center-buttons
+        button.button.button-calm.button-major.button-wide.button-calm(ng-click='cancel()', translate='transactions.medcard_replacement.cancel')
+
+        button.button.button-major.button-wide(ng-click='submit()', translate='transactions.medcard_replacement.confirm', ng-disabled='medCardTncForm.$invalid || !data.verificationCode || medCardVerificationForm.$invalid')

@@ -1,0 +1,36 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "aia-cordova-plugin": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.aia.trio.customerexpress"
+        }
+    },
+    "dependent_plugins": {}
+}

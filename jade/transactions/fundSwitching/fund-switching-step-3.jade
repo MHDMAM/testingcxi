@@ -1,0 +1,21 @@
+#step3(ng-if='steps===3')
+  //- main content
+  form.row.margin-bottom-large.has-border-padding(name='step3Form')
+    .col-90.center-block
+      .row
+        .col-50
+          span.pol-value.font-bold(translate='transactions.fs.step3.fund_name')
+        .col-50
+          span.pol-value.font-bold(translate='transactions.fs.step3.allocation')
+      .row
+        .col
+          .row.fund-row.topup-scroll-row(ng-repeat='item in viewData.premiumAllocations')
+            .col-50
+              span.span-vertical-center {{item.typeOfFund}}
+            .col-50
+              .row
+                label.item.item-input.input-margin(ng-class="{'form-error-input':step3Form[item.typeOfFund].$dirty && step3Form[item.typeOfFund].$invalid}")
+                  input.center-block.input-margin(type='number', ng-model='item.allocationPercent', name='{{item.typeOfFund}}', min='1', max='100')
+              .row
+                .error-container(ng-messages='step3Form[item.typeOfFund].$error', ng-show="!isPremAloccValid")
+                  small.error(translate='transactions.fs.step3.notes')

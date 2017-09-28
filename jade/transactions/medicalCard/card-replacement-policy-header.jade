@@ -1,0 +1,14 @@
+
+.row.has-border-padding.margin-bottom-small
+  .col-33
+    span.pol-value(translate='transactions.medcard_replacement.plan_name')
+    span.pol-property {{data.policyOwnerInfo.planName}}
+  .col-33
+    span.pol-value(translate='transactions.medcard_replacement.policy_no', , ng-if="data._Info.lineOfBiz !=='LAFT'")
+    span.pol-value(translate='takaful.policy_no', ng-if="data._Info.lineOfBiz ==='LAFT'")  
+    span.pol-property {{data.policyOwnerInfo.policyNo}}
+  .col-33
+    span.pol-value(translate='transactions.medcard_replacement.insured_name')
+    span.pol-property {{data.policyOwnerInfo.name}}
+
+        

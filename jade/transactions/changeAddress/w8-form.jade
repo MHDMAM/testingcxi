@@ -1,0 +1,187 @@
+#w8Form(ng-if='steps === "w8"')
+
+  //- customer details
+  .row
+    .col-90.center-block
+      .form-container
+        form(name='w8Form')
+          div
+            h3(translate='transactions.changeAddress.crs.w8.beneficial_owner_details')
+            .row.has-border-padding.margin-bottom-large
+              .col.padding-right-medium
+                span.pol-value(translate='transactions.changeAddress.crs.w8.name')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='data.policyOwnerInfo.name', required)
+              .col
+                span.pol-value(translate='transactions.changeAddress.crs.w8.citizenship_country')
+                label.item.item-input.selectArrow
+                  select.formInput(name='citizenshipCountry', ng-model='fatca.w8.ownerDetails.citizenshipCountry', ng-options='crscountry.key as crscountry.country for crscountry in viewData.crscountries', required)
+                    option(value='')
+                span.pol-value.sub-text(translate='transactions.changeAddress.crs.w8.citizenship_country_sub')
+            
+            //- permanent residence address section
+            span.body-text4(translate='transactions.changeAddress.crs.w8.perm_residence_addr')
+            span.pol-value.sub-text(translate='transactions.changeAddress.crs.w8.perm_residence_addr_hint')
+            .row
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address1')
+                label.item.item-input.input-margin.disabledItem
+                  input(type='text', ng-model='data.addressInfo.address1', ng-disabled='true')
+
+              .col(ng-if ='data.addressInfo.country==="MAL"')
+                span.col-value(translate='transactions.changeAddress.crs.w8.postcode')
+                label.item.item-input.input-margin.disabledItem
+                  input(type='text', ng-model='data.addressInfo.postCode', ng-disabled='true',  ng-required='data.addressInfo.country==="MAL"')
+
+
+            .row
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address2')
+                label.item.item-input.input-margin.disabledItem
+                  input(type='text', ng-model='data.addressInfo.address2', ng-disabled='true')
+
+              .col(ng-if ='data.addressInfo.country==="MAL"')
+                span.pol-value(translate='transactions.changeAddress.crs.w8.state')
+                  small.stable &nbsp; *
+                label.item.item-input.selectArrow.disabledItem(ng-class="{'form-error-input':w8Form.state.$dirty && !w8Form.state.$valid}")
+                  select(name='state', ng-model='data.addressInfo.state', ng-disabled='true', ng-options='state as state for state in viewData.states', ng-required='data.addressInfo.country==="MAL"')
+
+            .row.margin-bottom-large
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address3')
+                label.item.item-input.input-margin.disabledItem
+                  input(type='text', ng-model='data.addressInfo.address3', ng-disabled='true') 
+                  
+              .col
+                span.pol-value(translate='transactions.changeAddress.crs.w8.country')
+                label.item.item-input.selectArrow.disabledItem
+                  select.formInput(name='country', ng-model='data.addressInfo.country', ng-disabled='true', ng-options='country.key as country.country for country in viewData.countries')
+                   option(value='')  
+
+
+
+
+            //- mailing address section
+            span.body-text4(translate='transactions.changeAddress.crs.w8.mailing_addr')
+            span.pol-value.sub-text(translate='transactions.changeAddress.crs.w8.perm_residence_addr_hint')
+            
+            .row
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address1')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.addressInfo.address1')
+
+              .col(ng-if ='fatca.w8.addressInfo.country==="MAL"')
+                span.col-value(translate='transactions.changeAddress.crs.w8.postcode')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.addressInfo.postcode', ng-required='fatca.w8.addressInfo.country==="MAL"')
+
+            .row
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address2')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.addressInfo.address2')
+
+
+              .col(ng-if ='fatca.w8.addressInfo.country==="MAL"')
+                span.pol-value(translate='transactions.changeAddress.crs.w8.state')
+                  small.stable &nbsp; *
+                label.item.item-input.selectArrow(ng-class="{'form-error-input':w8Form.state.$dirty && !w8Form.state.$valid}")
+                  select(name='state', ng-model='fatca.w8.addressInfo.state', ng-options='state as state for state in viewData.states', ng-required='fatca.w8.addressInfo.country==="MAL"')
+
+            .row.margin-bottom-large
+              .col.padding-right-medium
+                span.col-value(translate='transactions.changeAddress.crs.w8.address3')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.addressInfo.address3')
+
+              .col
+                span.pol-value(translate='transactions.changeAddress.crs.w8.country')
+                label.item.item-input.selectArrow
+                  select.formInput(name='country', ng-model='fatca.w8.addressInfo.country', ng-options='country.key as country.country for country in viewData.countries')
+                   option(value='')
+
+          div
+            //- beneficial owner details
+            h3(translate='transactions.changeAddress.crs.w8.taxpayer_tin')
+            //- ssn
+            .row.margin-bottom-small
+              .col-50.padding-right-medium
+                span.pol-value(translate='transactions.changeAddress.crs.w8.ssn_tin_title')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.ssn', ng-disabled='fatca.w8.noSsn', ng-required='!fatca.w8.noSsn')
+              .col-50
+                .row
+                  .item.item-checkbox.checkbox-vertical-center
+                    label.checkbox
+                      input(type='checkbox', ng-model='fatca.w8.noSsn', ng-disabled='fatca.w8.ssn && crs.w8.ssn !== ""')
+
+                    | {{'transactions.changeAddress.crs.w8.no_ssn_tin' | translate}}
+                  //- (translate='transactions.changeAddress.crs.w8.no_ssn_tin')
+            //- tin
+            .row.margin-bottom-large.has-border-padding
+              .col-50.padding-right-medium
+                span.pol-value(translate='transactions.changeAddress.crs.w8.foreign_tin')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.tin', ng-disabled='fatca.w8.noTin', ng-required='!fatca.w8.noTin')
+              .col-50
+                .item.item-checkbox.checkbox-vertical-center
+                  label.checkbox
+                    input(type='checkbox', ng-model='fatca.w8.noTin', ng-disabled='fatca.w8.tin && crs.w8.tin !== ""')
+                  | {{'transactions.changeAddress.crs.w8.chk_no_tin' | translate}}
+
+              .col-50
+                .row.margin-bottom-xxs.margin-top-small(ng-if='fatca.w8.noTin')
+                  .col.padding-right-medium
+                    span.pol-value(translate='transactions.changeAddress.crs.w8.dob')
+                    label.item.item-input.input-margin
+                      input(type='date', ng-model='fatca.w8.dob', ng-required='fatca.w8.noTin')
+            //- reference no
+            .row.margin-bottom-large.has-border-padding
+              .col-50.padding-right-medium
+                span.pol-value(translate='transactions.changeAddress.crs.w8.ref_number_optional')
+                label.item.item-input.input-margin
+                  input(type='text', ng-model='fatca.w8.referenceNo')
+              .col
+
+          .row.topup-scroll(style='min-height: 500px')
+            //- ion-content
+            div
+              //- beneficial owner details
+              h3(translate='transactions.changeAddress.crs.w8.claim_of_tax_treaty_benefits')
+              .row.has-border-padding.margin-bottom-large
+                .col.padding-right-medium
+                  div.row
+                    .col-33
+                      span.span-vertical-center(translate='transactions.changeAddress.crs.w8.claim_of_tax_treaty_benefits_txt1')
+                    .col-33
+                      label.item.item-input.selectArrow
+                        select.formInput(name='citizenshipCountry', ng-model='fatca.w8.ownerDetails.country', ng-options='crscountry.key as crscountry.country for crscountry in viewData.crscountries')
+                    .col-33
+                      p.padding-left-xs(translate='transactions.changeAddress.crs.w8.claim_of_tax_treaty_benefits_txt2')
+
+
+              span.body-text4(translate='transactions.changeAddress.crs.w8.special_rate_conditions')
+              span.pol-value.sub-text(translate='transactions.changeAddress.crs.w8.special_rate_conditions_sub_txt')
+              .row
+                .col.padding-right-medium
+                  div.row
+                    span.col-33.span-vertical-center(translate='transactions.changeAddress.crs.w8.special_rate_conditions_txt1')
+                    div.col-33
+                      label.item.item-input.input-margin
+                        input(type='text', ng-model='fatca.w8.ownerDetails.article_name')
+                    span.col-33.span-vertical-center.padding-left-xs(translate='transactions.changeAddress.crs.w8.special_rate_conditions_txt2')
+                  div.row.margin-bottom-medium
+                    div.col-33
+                      label.item.item-input.input-margin
+                        input(type='number', ng-model='fatca.w8.ownerDetails.percentage', min='0', max='100')
+                    span.col-33.span-vertical-center.padding-left-xs(translate='transactions.changeAddress.crs.w8.special_rate_conditions_txt3')
+                    div.col-33
+                      label.item.item-input.input-margin
+                        input(ng-model='fatca.w8.ownerDetails.type_of_income', style="border: none;")
+
+              span(translate='transactions.changeAddress.crs.w8.reason_title')
+              .row
+                .col.padding-right-medium
+                    label.item.item-input.input-margin
+                      textarea(col=3, placeholder="{{'transactions.changeAddress.crs.w8.reason_placeholder' | translate }}", ng-model='fatca.w8.ownerDetails.reason', style='height: 75px;')

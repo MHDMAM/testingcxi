@@ -1,0 +1,12 @@
+.row
+  .col-33
+    span.pol-value(translate='transactions.cc.lbl_card_number')
+    span.pol-property {{data.creditCardInfo.cardNo}}
+
+  .col-33
+    span.pol-value(translate='transactions.cc.lbl_card_name')
+    span.pol-property {{data.creditCardInfo.insuredName}}
+
+  //- .col-33
+  //-   span.pol-value(translate='transactions.cc.lbl_expires_on')
+  //-   span.pol-property {{data.creditCardInfo.expiryDate | date:'MM yyyy'}}

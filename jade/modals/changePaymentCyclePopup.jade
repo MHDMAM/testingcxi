@@ -1,0 +1,25 @@
+ion-modal-view.changeCycleModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changePaymentCycle.popup.confirmation')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+  ion-content
+    .row
+      .col-90.center-block.margin-top-xl
+        p.center {{'transactions.changePaymentCycle.popup.header' | translate}}
+          strong RM{{popup.total}}
+        p.center.margin-bottom-large(translate='transactions.changePaymentCycle.popup.footer')
+        div.padding-top.padding-bottom.border-bottom(ng-repeat='msg in popup.msgs')
+          {{msg}}
+          br
+      
+
+  .bar.bar-footer
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-full.button-major(ng-click='closeModal()', translate='transactions.changePaymentCycle.popup.cancel')
+      .col-10
+      .col-33
+        button.button.button-major.button-full(ng-click='yes()', translate='transactions.changePaymentCycle.popup.proceed')
+      .col-10

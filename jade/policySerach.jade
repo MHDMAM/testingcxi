@@ -1,0 +1,24 @@
+ion-view(view-title="{{'policySerach.title' | translate}}")
+  ion-content
+    .loginBox
+      .search-icon-wrapper
+        img.search(src='img/policy-icon.svg')
+
+      //- h2(translate='policySerach.boxTitle')
+      .card-padding.padding-top-none.margin-top-medium
+        .form-container
+          form(name='thisForm')
+            label.item.item-input.input-margin(ng-class="{'form-error-input':thisForm.customerID.$dirty && !thisForm.customerID.$valid}")
+              input(type='text', name='customerID', ng-model='data.customerID', placeholder="{{'policySerach.searchInput' | translate}}", maxlength='12', required)
+            .error-container(ng-messages='thisForm.customerID.$error', ng-if="thisForm.customerID.$dirty")
+              small.error(ng-message='required', translate='policySerach.msgs.customer_id_required')
+
+
+
+            label.item.item-input.input-margin(ng-show='data.customerID.length<12')
+              span.input-label(translate='policySerach.dateInput', ng-show='!data.dob')
+              input(type='date', id='date' ng-model='data.dob', ng-required='data.customerID.length<12')
+            .error-container(ng-messages='thisForm.date.$error', ng-if="thisForm.date.$dirty")
+              small.error(ng-message='required', translate='policySerach.msgs.date_is_required')
+
+            button.button.button-stable.button-full.button-major(ng-click='search()', translate='policySerach.searchBtn', ng-disabled='thisForm.$invalid')

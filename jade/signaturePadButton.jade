@@ -1,0 +1,6 @@
+div
+  a.button.button-clear.button-stable.button-small.tap-here-icon(ng-hide='signature', ng-click='openSignatureModal()') Tap to sign
+  div(ng-show='signature')
+    p
+      a.button.button-clear.button-stable.button-small(ng-click='openSignatureModal()') Edit Signature
+    img(ng-src='{{signature}}', style='width:100%; width: 100%; background-color: gainsboro; -webkit-box-shadow: inset 9px 9px 11px -12px rgba(82,82,82,1); -moz-box-shadow: inset 9px 9px 11px -12px rgba(82,82,82,1); box-shadow: inset 9px 9px 11px -12px rgba(82,82,82,1);')

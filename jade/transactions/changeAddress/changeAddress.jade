@@ -1,0 +1,80 @@
+ion-view(view-title="{{'transactions.changeAddress.title' | translate}}")
+  ion-header-bar.sub-bar.padding-top-xs
+    .row
+      .col
+        .row(style='background: white')
+          .col
+            include ../../shared/stepper-4
+
+        .center.margin-bottom-xl(ng-if='steps === 1')
+          h2(translate='transactions.changeAddress.step1.edit')
+        .center.margin-bottom-xl(ng-if='steps === 2')
+          h2(translate='transactions.changeAddress.step2.edit')
+        .center.margin-bottom-xl(ng-if='steps === 3')
+          h2(translate='transactions.changeAddress.step3.edit')
+        .center.margin-bottom-xl(ng-if='steps === 4')
+          h2(translate='transactions.changeAddress.step4.edit')
+        .center.margin-bottom-xl(ng-if='steps === "w8"')
+          h2(translate='transactions.changeAddress.crs.w8.title')
+          h5.block(translate='transactions.changeAddress.crs.w8.subtitle', style='font-family: arial;')
+        .center.margin-bottom-xl(ng-if='steps === "w9"')
+          h2(translate='transactions.changeAddress.crs.fatcaW9.step1.page_title')
+          h5.block(translate='transactions.changeAddress.crs.fatcaW9.step1.sub_title')
+        .center.margin-bottom-xl(ng-if='steps === "crsYes"', style='background: white')
+          h2(translate='transactions.changeAddress.crs.h1')
+          h5.block(translate='transactions.changeAddress.crs.h2')
+        .center.margin-bottom-xl(ng-if='steps === "crsNo"')
+          h2(translate='transactions.changeAddress.crs.h1')
+          h5.block(translate='transactions.changeAddress.crs.h2')
+
+  form(name='thisForm')
+    ion-content.page-padding.body-with-subbar
+      include crs-selfcert-yes
+      include crs-selfcert-no
+      include crs-selfcert-docs
+
+      include w8-form
+
+      include address-step-1
+      include address-step-2
+      include address-step-3
+      include address-step-4
+      include crs-fatca-W9-step-1
+
+    ion-footer-bar.page-footer
+      .row
+        .col
+          .row
+            .col
+              div(ng-if='steps === 1')
+                button.center-block.button.button-major.button-wide(ng-click='gotoFatca()', translate='transactions.changeAddress.next', ng-disabled='thisForm.$invalid')
+              .center-buttons(ng-if='steps === 2')
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.changeAddress.previous')
+                button.button.button-major.button-wide(ng-click='updateState(3)', translate='transactions.changeAddress.confirm', ng-disabled='viewData.selectedPolicies.length === 0')
+              .center-buttons(ng-if='steps === 3')
+
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(2)', translate='transactions.changeAddress.previous', ng-if='!viewData.digitalSigned')
+                button.button.button-major.button-wide(ng-click='digitalSign()', translate='transactions.changeAddress.step3.ack_sign', ng-if='!viewData.digitalSigned')
+
+                button.button.button-calm.button-wide.button-major(ng-click='cancelTransaction()', translate='transactions.changeAddress.cancel', ng-if='viewData.digitalSigned')
+                button.button.button-major.button-wide(ng-click='submit()', translate='transactions.changeAddress.confirm', ng-disabled='thisForm.$invalid', ng-if='viewData.digitalSigned')
+
+              .center-block(ng-if='steps === 4')
+                button.center-block.button.button-major.button-wide.margin-top-large(ng-click='close()', translate='transactions.changeAddress.step4.back_to_dashboard')
+              .center-buttons(ng-if='steps === "w8"')
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.dc.step3.cancel')
+                button.button.button-major.button-wide(ng-click='gotoCRS()', translate='transactions.changeAddress.next', ng-disabled='thisForm.$invalid')
+              .center-buttons(ng-if='steps === "w9"')
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.changeAddress.crs.fatcaW9.step1.cancel')
+                button.button.button-major.button-wide(ng-click='gotoCRS()', translate='transactions.changeAddress.next', ng-disabled='thisForm.$invalid')
+
+              .center-buttons(ng-if='steps === "crsYes"')
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.dc.step3.cancel')
+                button.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.changeAddress.next', ng-disabled='disableCRSYES()')
+
+              .center-buttons(ng-if='steps === "crsNo"')
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.dc.step3.cancel')
+                button.button.button-major.button-wide(ng-click='crsNoProceed()', translate='transactions.changeAddress.next', ng-disabled='thisForm.$invalid')
+              .center-buttons(ng-if='steps === "crsDocs"')
+                button.button.button-calm.button-wide.button-major(ng-click="updateState('crsNo')", translate='transactions.changeAddress.previous')
+                button.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.changeAddress.next', ng-disabled='pics.length==0')

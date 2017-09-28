@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>ad hoc topup</title>
+
+</head>
+
+<body>
+
+<table>
+  <tr>
+    <td>
+    <p>Dear <strong><%= ownerName %></strong>,</p>
+    <br>
+
+    <p>Thank you your payment of <strong>RM<%= amount %></strong> on <%= dateTime %>. </p>
+    <br>
+
+    <p>We have received your request of <strong><%= transactionType %></strong> for the policy/certificate below on <%= dateTime %>.  Enclosed is the receipt for your safekeeping.
+
+    <br>
+    Your request will be processed and confirmation will be sent to you once it is completed.
+    </p>
+
+    <br>
+    <p>Policy/Certificate Number</p>
+    <p><strong><%= policyNo %></strong></p>
+
+    <br>
+
+    <p>If you have any questions, please contact our Care Line at 1300 88 1899. Our office hours are:</p>
+
+    <p>Monday to Thursday 8.30am - 5.30pm</p>
+    <p>Friday 8.30am - 4.30pm</p>
+
+    <br>
+
+    <p>Thank you.</p>
+    <p>Yours sincerely
+    <br>AIA Bhd/AIA Public Takaful</p>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

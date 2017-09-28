@@ -1,0 +1,159 @@
+#step2.full-bleed2.ng-enter(ng-if='steps===2')
+  .center
+    h2(translate='payment.select.makePayment')
+
+  .row.payment-card
+    .col-33.payment-left-pane.pane-scroll
+      ion-content
+        .row.payment-left-pane-item(ng-repeat='item in selectedPolices', ng-class="{'payment-card-selected': item.actions.current}", ng-click='onPolicyClickStep2($index)')
+          .col.padding-left-xxs
+            .payment-item-icon
+              svg.icon-xs(role='img' title='lifepro-prime1')
+                use(xlink:href='img/icons.svg#lifepro-prime1')
+            .policy-pay-item
+              h4 {{item.planName}}
+              span(ng-if="item.lineOfBiz !== 'LAFT'") {{'payment.select.next_due' | translate}} {{item.premiumDueDate}}
+              span.pol-value(ng-if="item.topUpAmount") Topup Amount {{item.topUpAmount}}
+              span(ng-if="item.lineOfBiz === 'LAFT'") {{'takaful.premium_due_date' | translate}} {{item.premiumDueDate}}
+              h5 RM{{item.actions.total | fix2}}
+              
+            .glyph-arrow(ng-show='item.actions.current')
+              svg.icon-arrow(role='img' title='#')
+                use(xlink:href='img/icons.svg#arrow-red')
+
+      .payment-left-bottom
+        .row.grand-total
+          .col-50
+            h4(translate='payment.select.grand_total')
+          .col-50
+            span RM{{data.grandTotal | aiadecimal}}
+
+        .payment-left-buttons
+          label.item.item-input.selectArrow
+            select(name='paymentType', ng-model='data.paymentType' ng-options='item.id as item.title for item in viewData.payments', required)
+              option(value='', translate='payment.select.select_payment')
+            
+       
+
+          
+          .row
+            .col-50.padding-right-xxs
+              button.center-block.button.button-major.button-full.button-calm(ng-click='updateState(1)', translate='payment.select.back', ng-disabled='disableStep1Back')
+            .col-50.padding-left-xxs
+              //- button.center-block.button.button-major.button-full(ng-click='submit()', translate='payment.make.next', ng-disabled='selectedPolices.length===0')
+              button.center-block.button.button-major.button-full(ng-click='goPayment()', translate='payment.make.next', ng-disabled='!data.paymentType')
+
+
+
+
+    .col-67.padding-large
+      .row
+        .col-50
+          h4.margin-bottom-small {{selectedPolicy.planName}}
+          span.margin-bottom-small.negative-margin.pol-value2 {{selectedPolicy.lineOfBiz | lineofbiztotext}}
+          .item-container
+            span.pol-value(translate='takaful.policy_no', ng-if="selectedPolicy.lineOfBiz === 'LAFT'")
+            span.pol-value(translate='payment.select.policy_no', ng-if="selectedPolicy.lineOfBiz !== 'LAFT'")
+            span.pol-property2 : {{selectedPolicy.policyNo}}
+
+          .item-container
+            span.pol-value(translate='takaful.policy_status', ng-if="selectedPolicy.lineOfBiz === 'LAFT'")
+            span.pol-value(translate='payment.select.policy_status', ng-if="selectedPolicy.lineOfBiz !== 'LAFT'")
+            span.pol-property2.p-red-color {{selectedPolicy.policyStatus}}
+
+          .item-container(ng-show="isInForceETI(selectedPolicy) || isLapsed(selectedPolicy)")
+            span.pol-value(translate='payment.select.reinstatement_cost')
+            span.pol-property2 : {{selectedPolicy.reinstatementOutstandingAmount}}
+
+          .item-container(ng-show="isInForceSVE(selectedPolicy.policyStatus)")
+            span.pol-value(translate='payment.select.outstanding_premium_interest')
+            span.pol-property2 : {{selectedPolicy.reinstatementOutstandingAmount}}
+
+          .item-container(ng-show="isInForceETI(selectedPolicy)")
+            span.pol-property2 {{'payment.select.last_paid_date' | translate}} : {{selectedPolicy.lastPaidToDate}}
+
+          .item-container
+            span.pol-value(translate='payment.select.insured_name')
+            span.pol-property2 : {{selectedPolicy.insuredName}}
+
+          .item-container(ng-hide='selectedPolicy.topUpAmount', ng-if='selectedPolicy.totalPremiumAmount')
+            span.pol-value(translate='payment.select.premium_amount', ng-if="selectedPolicy.lineOfBiz !== 'LAFT'")
+            span.pol-value(translate='takaful.policy_due_amount', ng-if="selectedPolicy.lineOfBiz === 'LAFT'") 
+            span.pol-property2 : RM{{selectedPolicy.totalPremiumAmount}}
+            p.sub-text.no-margin {{selectedPolicy | paymentSimple}}
+            p.sub-text.no-margin {{selectedPolicy.freq | duepay}}
+
+          .item-container
+            span.pol-value(translate='takaful.premium_due_date', ng-if="selectedPolicy.lineOfBiz === 'LAFT'")
+            span.pol-value(translate='payment.select.next_due', ng-if="selectedPolicy.lineOfBiz !== 'LAFT'")
+            span.pol-property2 {{selectedPolicy.premiumDueDate}}
+          
+        .col-50.payment-col
+          //- .row(ng-show="isInforce() && selectedPolicy.totalPremiumAmount")
+          .row(ng-hide='isLapsed(selectedPolicy) || isInForceETI(selectedPolicy) || isInForceSVE(selectedPolicy) || selectedPolicy.totalPremiumAmount === 0')
+            .col-33 
+              span(translate='payment.select.current')
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.totalPremiumAmount}}
+          .row(ng-show="isLapsed(selectedPolicy) || isInForceETI(selectedPolicy) || isCA(selectedPolicy)")
+            .col-33 
+              span(translate='payment.select.reinstatement')
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.reinstatementOutstandingAmount}}
+          .row(ng-show="isInForceSVE(selectedPolicy)")
+            .col-33 
+              span(translate='payment.select.outstanding_premium_interest')
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.reinstatementOutstandingAmount}}
+          .row(ng-if='selectedPolicy.advance')
+            .col-33
+              span(translate='payment.select.advance')
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.advance}}
+          .row.optional(ng-if='selectedPolicy.actions.aplSelected')
+            .col-33
+              span(translate='payment.make.apl')
+            .col-33
+              span RM
+            .col-33
+              input.optional-payment-input(type='number', ng-model='selectedPolicy.apl', min='{{selectedPolicy.actions.aplMin}}', max='{{selectedPolicy.actions.aplMax}}', ng-disabled='selectedPolicy.actions.aplDisabled', ng-change='calcTotalApl(1)', ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }")
+          .row(ng-if='selectedPolicy.topUpAmount')
+            .col-33
+              span New Topup Amount
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.topUpAmount}}
+          .row.optional(ng-if='item.actions.aplSelected')
+            .col-33
+              span(translate='payment.select.apl')
+            .col-33
+              span RM
+            .col-33
+              input.optional-payment-input(type='number', ng-model='item.apl', min='{{selectedPolicy.actions.aplMin}}', max='{{selectedPolicy.actions.aplMax}}', ng-disabled='selectedPolicy.actions.aplDisabled', ng-change='calcTotalApl(1)', ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }")
+          .row.optional(ng-if='selectedPolicy.actions.loanSelected')
+            .col-33
+              span(translate='payment.select.policy_loan')
+            .col-33
+              span RM
+            .col-33
+              input.optional-payment-input(type='number', ng-model='selectedPolicy.loan', min='{{selectedPolicy.actions.loanMin}}', max='{{selectedPolicy.actions.loanMax}}', ng-disabled='selectedPolicy.actions.loanDisabled', ng-change='calcTotalLoan(1)', ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }")
+          .row
+            .col-33
+              span(translate='payment.select.total')
+            .col-33
+              span RM
+            .col-33
+              span.pull-right {{selectedPolicy.actions.total |fix2}}
+
+              
+
+

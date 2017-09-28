@@ -1,0 +1,83 @@
+ion-view#fw(view-title="{{'transactions.fs.title' | translate}}")
+  //- ion-header-bar.padding-top-xs.sub-bar
+  ion-header-bar.padding-top-xs(ng-class="{'sub-bar':steps!==5, 'step-4-page-header':steps===5}")
+    .row
+      .col
+        .row
+          .col
+            include ../../shared/stepper-5
+
+        #step1(ng-if='steps===1')
+          .center.margin-bottom-xl
+            h2(translate='transactions.fs.step1.title')
+
+          //- customer details
+          .row
+            .col-90.center-block
+              include form-header
+
+        #step2(ng-if='steps===2')
+          .center.margin-bottom-xl
+            h2(translate='transactions.fs.step2.title')
+
+          .row
+            .col-90.center-block
+              include form-header
+        
+        #step3(ng-if='steps===3')
+          .center.margin-bottom-xl
+            h2(translate='transactions.fs.step3.title')
+              //- customer details
+          .row
+            .col-90.center-block
+              include form-header
+
+        #step44(ng-if='steps===4')
+          .center.margin-bottom-xl
+            h2(translate='transactions.fs.step4.title')
+          
+                       
+        #step5(ng-if='steps===5')
+          .center.margin-bottom-xl
+            h2(translate='transactions.fs.step4.title')
+
+
+  //- ion-content.page-padding.body-with-subbar
+  ion-content.page-padding(ng-class="{'body-with-subbar':steps<4, 'step-4-page-header step-4-page-has-footer':steps===5, 'step4-special': steps===4}")
+
+    include fund-switching-step-1
+    include fund-switching-step-2
+    include fund-switching-step-3
+    include fund-switching-step-4
+    include fund-switching-step-5
+
+  //- ion-footer-bar(ng-class="{'page-footer':steps<4, 'step-4-page-footer':steps>=4}")
+  ion-footer-bar.page-footer
+    .row
+      .col
+        .row
+          .col
+            div(ng-if='steps === 1')
+              .clearfix.col-90.center-block
+                span.pol-value.font-bold(translate='transactions.fs.note') |
+                span.pol-value {{'transactions.fs.notes_txt' | translate}} {{viewData.current_date}}
+              button.button.button-major.button-wide.center-block(ng-click='updateState(2)', translate='transactions.fs.next', ng-disabled='!validateStep1Form()')
+            
+            div(ng-if='steps === 2')
+              .center-buttons
+                button.button.button-calm.button-wide.button-major(ng-click='updateState(1)', translate='transactions.fs.previous')
+
+                button.button.button-major.button-wide(ng-click='validateStep2Form()', translate='transactions.fs.next', ng-disabled='step2Form.$invalid || !viewData.valid')   
+
+            div(ng-if='steps === 3').clearfix.col-90.center-block 
+              span.pol-value.font-bold(translate='transactions.fs.step3.note')
+              span.pol-value(translate='transactions.fs.step3.notes')
+              button.center-block.button.button-major.button-wide(ng-click='validateStep3Form()', translate='transactions.fs.step3.confirm', ng-disabled='!isPremAloccValid')              
+
+            div(ng-if='steps === 4').center-buttons
+              button.button.button-calm.button-wide.button-major(ng-click='cancel()', translate='transactions.fs.cancel')
+
+              button.button.button-major.button-wide(ng-click='submit()', translate='transactions.fs.confirm', ng-disabled='!data.tncChecked || !data.verificationCode')
+
+            div(ng-if='steps === 5').center
+              button.button.button-major.button-wide.margin-top-large(ng-click='close()', translate='transactions.changeAddress.step3.back_to_dashboard')

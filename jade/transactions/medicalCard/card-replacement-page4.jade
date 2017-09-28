@@ -1,0 +1,35 @@
+#step3.ng-enter(ng-if='steps===4')
+  .center.margin-bottom-xl
+    h2(translate='transactions.medcard_replacement.page4_title')
+    //- span.pol-value(translate='transactions.medcard_replacement.page4_desc')
+
+  .full-bleed.status-message.margin-bottom-medium
+    div.status-text-block.margin-bottom-xs
+      span(translate="transactions.medcard_replacement.transact_status")
+      span.status-success(ng-if='viewData.success === true', translate="transactions.medcard_replacement.submit_success")
+      span.status-fail(ng-if='viewData.success === false', translate="transactions.cc.submit_failed")
+      //- span.status-success {{data.success ? 'Successfully Submitted' : 'Failed'}}
+    span.pol-value(translate='transactions.medcard_replacement.confirmation_email_sent')
+
+
+  .row
+    .col-90.center-block
+      include card-replacement-policy-header
+
+      .has-border-padding.margin-bottom-large
+        h3(translate='transactions.medcard_replacement.requested_members')
+        ul.bullet-list
+          li(ng-repeat='candidate in viewData.selectedCandidates') {{candidate.name}}
+
+      .has-border-padding.margin-bottom-large
+        .h3(translate='transactions.medcard_replacement.to_be_delivered_to')
+        span.pol-value {{data.addressInfo.address1}}
+        span.pol-value {{data.addressInfo.address2}}
+        span.pol-value {{data.addressInfo.address3}}
+        span.pol-value {{data.addressInfo.postCode}}, {{data.addressInfo.state}}, {{viewData.countryObj.country}}
+
+      br
+      br
+
+      .center
+        button.button.button-major.button-wide(ng-click='close()', translate='transactions.cc.back_to_dashboard')

@@ -1,0 +1,55 @@
+ion-modal-view.cancelDirectCreditModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changeAddress.modal.digital_sign_title')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='closeModal()')
+
+        //- do ur changes.
+  ion-content.center-block
+    .row
+      .col-80.center-block.margin-top-xl
+        h3(translate='transactions.changeAddress.digital_sign_modal.crs_title')
+
+        ul.list-numeral
+          li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.crs_para1')
+          ul.list-alpha
+            li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.crs_para1a')
+            li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.crs_para1b')
+
+          li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.crs_para2')
+          li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.crs_para3')
+          li.margin-bottom-large(translate='transactions.changeAddress.digital_sign_modal.crs_para4')
+
+        h3(translate='transactions.changeAddress.digital_sign_modal.title2')
+        
+        ul.list-numeral
+          li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.us_person1')
+          li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.us_person2')
+
+          p(translate='transactions.changeAddress.digital_sign_modal.note')
+          ul.list-alpha.margin-bottom-large
+            li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.note_pt1')
+            li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.note_pt2')
+            li.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.note_pt3')
+        p.margin-bottom-large(translate='transactions.changeAddress.digital_sign_modal.note_summary')
+
+        h3(translate='transactions.changeAddress.digital_sign_modal.title3')
+        p.margin-bottom-large(translate='transactions.changeAddress.digital_sign_modal.privacy')
+
+
+        p.margin-bottom-medium(translate='transactions.changeAddress.digital_sign_modal.note')
+
+
+        //- keep it
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx1', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.digital_sign_modal.declare1')
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx2', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.digital_sign_modal.declare2')
+        li.item.item-checkbox
+          label.checkbox
+            input(type='checkbox', name='tncCheck', ng-model='popupDeclaration.chkbx3', ng-click='tncCheck()')    
+          span(translate='transactions.changeAddress.digital_sign_modal.declare3')

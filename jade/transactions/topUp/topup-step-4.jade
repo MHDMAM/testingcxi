@@ -1,0 +1,8 @@
+#step4(ng-if='steps===4')
+  .center.margin-bottom-xl
+    h2(translate='transactions.topup.tilte_step4')
+
+  include topup-confirm-content
+
+  .center
+    button.button.button-major.button-wide(ng-click='finish()', translate='transactions.topup.back_to_dashboard')

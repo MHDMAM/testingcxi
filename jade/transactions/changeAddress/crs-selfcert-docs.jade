@@ -1,0 +1,15 @@
+#step1(ng-if='steps === "crsDocs"')
+  .row
+    .col-90.center-block
+      .form-container
+        h3(translate='transactions.changeAddress.crs.docs.title')
+        span.block(translate='transactions.changeAddress.crs.docs.subtitle')
+
+        .row.margin-top-medium
+          .col-90.center-block.has-border-padding.medical-thumb-container
+            .clock.medical-thumb(ng-repeat='pic in pics track by $index', ng-click='previewPic($index)')
+              div
+                img(ng-src='{{pic}}')
+            .clock.medical-take-photo(ng-hide='pics.length === 6', ng-click='scanDoc()')
+              img(src='img/camera.svg')
+              h3(translate='transactions.changeAddress.crs.upload_doc.take_photo')

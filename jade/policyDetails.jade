@@ -1,0 +1,325 @@
+ion-view(view-title="{{'policyDetails.title' | translate}}", ng-class="{'play-with-footer':!viewData.showMore}")
+  ion-content
+    .details-palan-wrapper
+      .policy-details-header
+        .row.margin-bottom-large
+          .col-90.center-block
+            .policy-details-header-items
+              .policy-icon-container
+                svg.icon-s(role='img' title='lifepro-prime1')
+                  use(xlink:href='img/icons.svg#lifepro-prime1')
+
+              .policy-name-container.margin-top-medium
+                span.pol-titlle {{viewData.policyInfo.planName}}
+                p {{viewData.policyInfo.lineOfBiz | lineofbiztotext}}
+
+
+            .tab-container.margin-bottom-small.margin-top-large
+              .tab-container-item(ng-click='updateTab(0)')
+                span(ng-class="{'tab-container-item-active': tab==0}", translate='policyDetails.policy_info')
+              .tab-container-item(ng-click='updateTab(1)')
+                span(ng-class="{'tab-container-item-active': tab==1}", translate='policyDetails.addon_benefit_rider')
+              .tab-container-item(ng-click='updateTab(2)', ng-if='viewData.investmentPortfolio && viewData.investmentPortfolio.length>0')
+                span(ng-class="{'tab-container-item-active': tab==2}", translate='policyDetails.investment_portfolio')
+              .tab-container-item(ng-click='updateTab(3)')
+                span(ng-class="{'tab-container-item-active': tab==3}", translate='policyDetails.client_details')
+              .tab-container-item(ng-click='updateTab(4)')
+                span(ng-class="{'tab-container-item-active': tab==4}", translate='policyDetails.life_planner')
+
+
+      .row(ng-if='tab==0')
+
+        .col-90.center-block
+          .row.row-separator
+            .col-33
+              span.pol-value(translate='policyDetails.person_covered') 
+              span.pol-property {{viewData.policyInfo.insuredName}}
+            .col-33
+              span.pol-value(translate='takaful.policy_no', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")  
+              span.pol-value(translate='policyDetails.policy_number', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'")
+              span.pol-property {{viewData.policyInfo.policyNo}}
+            .col-33
+              span.pol-value(translate='policyDetails.coverage_amount') 
+              span.pol-property {{viewData.calulatedFeilds.coverageAmount.sumAssured || 'N/A' | currency:"RM"}}
+
+          .row.row-separator
+            .col-33
+              span.pol-value(translate='takaful.policy_status', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+              span.pol-value(translate='policyDetails.policy_status', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'")
+              span.pol-property {{viewData.policyInfo.policyStatus}}
+            .col-33
+              span.pol-value(translate='takaful.premium_due_date', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+              span.pol-value(translate='policyDetails.premium_due_date', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'")
+              span.pol-property {{viewData.policyInfo.premiumDueDate | aiadate}}
+            .col-33
+              span.pol-value(translate='policyDetails.premium_amount', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") 
+              span.pol-value(translate='takaful.policy_due_amount', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+              span.pol-property {{viewData.policyInfo.premiumAmount | currency:"RM"}} &nbsp;
+              //- a.inline-link Pay Now 
+              span.pol-value {{'policyDetails.inclusive_of_gst_paid1' | translate}} RM{{viewData.policyInfo.gstAmount}} {{'policyDetails.inclusive_of_gst_paid2_1' | translate}} {{viewData.policyInfo.freq | duepay}}
+
+          .row.row-separator
+            .col-33
+              //- span.pol-value(translate='takaful.premium_cease_date', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+              //- span.pol-value(translate='policyDetails.premium_cease_date', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'")
+              span.pol-value(translate='policyDetails.premium_cease_date')
+              span.pol-property(ng-if="viewData.policyInfo.lineOfBiz !=='PA'") {{viewData.policyInfo.premiumCeaseDate | aiadate}}
+              span.pol-property(ng-if="viewData.policyInfo.lineOfBiz ==='PA'") {{viewData.policyInfo.policyExpiryDate | aiadate}} 
+            .col-66
+              span.pol-value(translate='policyDetails.coverage_period')
+              span.pol-property(ng-if='viewData.policyInfo.lineOfBiz === "PA"') From  {{viewData.policyInfo.coveragePeriod.start | aiadate}} to {{viewData.policyInfo.policyExpiryDate | aiadate}}
+              span.pol-property(ng-if='viewData.policyInfo.lineOfBiz !== "PA"') From {{viewData.policyInfo.coveragePeriod.start | aiadate}} to {{viewData.policyInfo.coveragePeriod.end | aiadate}}
+           
+          .row.row-separator
+            .col-33(ng-show='viewData.directCreditAcctInfo.bankName && viewData.directCreditAcctInfo.bankAccount')
+              span.pol-value(translate='policyDetails.reimburse_account_info')
+              span.pol-property {{viewData.directCreditAcctInfo.bankName}} &nbsp;
+              span.pol-property {{viewData.directCreditAcctInfo.bankAccount}}
+              span.pol-property &nbsp;
+            .col-66
+              span.pol-value(translate='policyDetails.payment_method')
+              span.pol-property {{viewData.policyInfo.paymentMethod}}
+              span.pol-value {{viewData.policyInfo.bankName}} &nbsp; {{viewData.policyInfo.cardNo}} 
+           
+          .row.row-separator(ng-if="viewData.policyInfo.lineOfBiz ==='LA'")
+            .col-33
+              span.pol-value(translate='policyDetails.APL_with_Interest')
+              span.pol-property RM{{viewData.policyInfo.aplWithInterest || '0.00'}}
+            .col-66
+              span.pol-value(translate='policyDetails.policy_loan_with_interest') 
+              span.pol-property RM{{viewData.policyInfo.policyLoanWithInterest || '0.00'}}
+           
+    
+      .row(ng-if='tab==1')
+        .col.no-padding
+          .row(ng-repeat='rider in viewData.riders track by $index')
+            .col-90.center-block
+                .row.rider-row.has-border-padding.margin-bottom-small
+                  .col-10
+                    svg.icon-s(role='img' title='lifepro-prime1')
+                      use(xlink:href='img/icons.svg#lifepro-prime1')
+                  .col-90(ng-if="viewData.policyInfo.lineOfBiz ==='PA'")
+                    .pol-titlle {{rider.planRiders}}
+                    .row.row-separator
+                      .col-33
+                        span.pol-value(translate='policyDetails.sum_insurred')
+                        span.pol-property(ng-if='rider.sumAssured !=="9999999"') {{rider.sumAssured}}
+                        span.pol-property(ng-if='rider.sumAssured ==="9999999"') See Contract.
+                      .col-33
+                        span.pol-value(translate='takaful.policy_status', ng-if="plan.lineOfBiz ==='LAFT'")
+                        span.pol-value(translate='policyDetails.status', ng-if="plan.lineOfBiz !=='LAFT'")
+                        span.pol-property {{rider.status}}
+                      .col-33
+                        span.pol-value(translate='policyDetails.bonus')
+                        span.pol-property {{rider.bonus}}
+
+                  .col-90(ng-if="viewData.policyInfo.lineOfBiz !=='PA'")
+                    .pol-titlle {{rider.planRiders}}
+                    .row.row-separator
+                      .col-33
+                        span.pol-value(translate='policyDetails.sum_insurred')
+                        span.pol-property {{rider.sumAssured}}
+                      .col-33
+                        span.pol-value(translate='takaful.policy_status', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+                        span.pol-value(translate='policyDetails.status', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'")
+                        span.pol-property {{rider.status}}
+                      .col-33
+                        span.pol-value(translate='policyDetails.premium_amount', ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") 
+                        span.pol-value(translate='takaful.policy_due_amount', ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'")
+                        span.pol-property RM{{rider.premium}}
+                        span.pol-value {{'policyDetails.inclusive_of_gst_paid1' | translate}} RM{{rider.gstAmount || '0.00'}} {{'policyDetails.inclusive_of_gst_paid2' | translate}}
+                    .row.row-separator
+                      .col-33
+                        span.pol-value(translate='policyDetails.start_date') 
+                        span.pol-property {{rider.effectiveDate | aiadate}}
+                      .col-33
+                        span.pol-value(translate='policyDetails.expiry_date')
+                        span.pol-property {{rider.expiryDate | aiadate}}
+                      .col-33
+                        span.pol-value(translate='policyDetails.premium_cease_date', ng-if="viewData.policyInfo.lineOfBiz !=='PA'")
+                        span.pol-value(translate='policyDetails.bonus', ng-if="viewData.policyInfo.lineOfBiz ==='PA'")
+                        span.pol-property(ng-if="viewData.policyInfo.lineOfBiz ==='PA'") {{rider.bonus}}
+                        span.pol-property(ng-if="viewData.policyInfo.lineOfBiz !=='PA'") {{rider.premiumCeaseDate | aiadate}}
+
+      .row(ng-if='tab==2 && viewData.investmentPortfolio && viewData.investmentPortfolio.length>0')
+        .col.no-padding
+          .row
+            .col-90.center-block
+              .row.table-header
+                //- table:
+                .col-10
+                  span(translate='policyDetails.Table_no')
+                .col-25
+                  span(translate='policyDetails.Table_type_of_fund')
+                .col-25
+                  span(translate='policyDetails.Table_no_of_units') 
+                //- .col-20
+                //-   span(translate='policyDetails.Table_allocation')
+                .col-20
+                  span(translate='policyDetails.Table_unit_price')
+                .col-20
+                  span(translate='policyDetails.Table_value_of_units_rm')
+              .row.table-row(ng-repeat='portfolio in viewData.investmentPortfolio track by $index')
+                //- table:
+                .col-10
+                  span {{$index+1}}
+                .col-25
+                  span {{portfolio.typeOfFund}}
+                .col-25
+                  span {{portfolio.noOfUnits}}
+                //- .col-20
+                //-   span {{portfolio.allocationPercent | fix2}} 
+                .col-20
+                  span {{portfolio.unitPrice}}
+                .col-20
+                  span {{portfolio.valueOfUnits | fix2}}
+             
+              .row.table-row
+                .col-20
+                .col-20
+                .col-20
+                .col-20
+                  span.font-bold(translate='policyDetails.Table_total') 
+                .col-20
+                  span.font-bold {{viewData.calulatedFeilds.Table_total | fix2}}
+
+              .legal-notes
+                p(translate='policyDetails.notes') 
+                ol
+                  li(translate='policyDetails.notes_line1')
+                  li(translate='policyDetails.notes_line2')
+
+
+      .row(ng-if='tab==3')
+        .col.no-padding
+          .row.margin-bottom-small.rider-row
+            .col-90.center-block
+              .row.has-border-padding.margin-bottom-small
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") {{viewData.clientDetails.policyOwnerName}}, {{'policyDetails.policy_owner_role' | translate}}
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'") {{viewData.clientDetails.policyOwnerName}}, {{'policyDetails.certifi_owner_role' | translate}}
+                  .row.row-separator
+                    .col-50
+                      span.pol-value(translate='policyDetails.identification_no') 
+                      span.pol-property {{viewData.clientDetails.idNo}}
+                    .col-50
+                      span.pol-value(translate='policyDetails.address')
+                      span.pol-property.display-block  {{viewData.clientDetails.address1}}
+                      span.pol-property.display-block  {{viewData.clientDetails.address2}}
+                      span.pol-property.display-block  {{viewData.clientDetails.address3}}
+                      span.pol-property.display-block  {{viewData.clientDetails.postcode}} &nbsp; {{viewData.clientDetails.state}} 
+                      span.pol-property.display-block  {{viewData.calulatedFeilds.country.value}}
+
+                  .row.row-separator
+                    .col-50
+                      span.pol-value(translate='policyDetails.mobile_number')
+                      span.pol-property {{viewData.clientDetails.mobileNo || 'N/A'}}
+                    .col-50
+                      span.pol-value(translate='policyDetails.email_address') 
+                      span.pol-property {{viewData.clientDetails.email || 'N/A'}}
+                  
+                  .row.row-separator
+                    .col-50
+                      span.pol-value(translate='policyDetails.home_number')
+                      span.pol-property {{viewData.clientDetails.homeNo || 'N/A'}}
+                    .col-50
+                      span.pol-value(translate='policyDetails.office_number')
+                      span.pol-property {{viewData.clientDetails.officeNo || 'N/A'}}
+              //- payor
+              .row.has-border-padding.margin-bottom-small(ng-if='viewData.payor.name && viewData.payor.role')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") {{viewData.payor.name}}, {{'policyDetails.payor_role' | translate}}
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'") {{viewData.payor.name}}, {{'policyDetails.contrib_role' | translate}}
+                  .row.row-play
+                    .col-50
+                      span.pol-value(translate='policyDetails.identification_no')
+                      span.pol-property {{viewData.payor.idNo}}
+              //- insured
+              .row.has-border-padding.margin-bottom-small(ng-repeat='insured in viewData.insured track by $index', ng-if='insured.name && insured.role')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") {{insured.name}}, {{'policyDetails.life_assured_role' | translate}}
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'") {{insured.name}}, {{'policyDetails.life_covered_role' | translate}}
+                  .row.row-play
+                    .col-50
+                      span.pol-value(translate='policyDetails.identification_no')
+                      span.pol-property {{insured.idNo}}
+              //- trustee
+              .row.has-border-padding.margin-bottom-small(ng-repeat='trustee in viewData.trustee track by $index', ng-if='trustee.name && trustee.role')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") {{trustee.name}}, {{'policyDetails.trustee_role' | translate}}
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'") {{trustee.name}}, {{'policyDetails.wasi_role' | translate}}
+              //- coveredMember
+              .row.has-border-padding.margin-bottom-small(ng-repeat='covered in viewData.coveredMember track by $index', ng-if='covered.name && covered.role')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  .pol-titlle {{covered.name}}, {{covered.role}}
+              //- coveredMember
+              .row.has-border-padding.margin-bottom-small(ng-repeat='nominee in viewData.nominee track by $index', ng-if='nominee.name && nominee.role') 
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz !=='LAFT'") {{nominee.name}}, {{'policyDetails.nominee_role' | translate}}, {{nominee.percentage}} %
+                  span.pol-titlle(ng-if="viewData.policyInfo.lineOfBiz ==='LAFT'") {{nominee.name}}, {{'policyDetails.hibah_role' | translate}}, {{nominee.percentage}} %
+                  .row.row-play
+                     .col-50
+                       span.pol-property {{nominee.relationship}}
+
+              //- contigentOwner
+              .row.has-border-padding.margin-bottom-small(ng-if='viewData.contigentOwner.name && viewData.contigentOwner.role')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  .pol-titlle {{viewData.contigentOwner.name}},  {{viewData.contigentOwner.role}}
+
+      .row(ng-if='tab==4')
+        .col.no-padding
+          .row
+            .col-90.center-block
+              .row.has-border-padding.margin-bottom-small.rider-row(ng-repeat='agent in viewData.myLifePlanner track by $index')
+                .col-10
+                  svg.icon-s(role='img' title='lifepro-prime1')
+                    use(xlink:href='img/icons.svg#userphoto-prime1')
+                .col-90
+                  .pol-titlle {{agent.name}}
+                  .row.row-separator
+                    .col-50
+                      span.pol-value(translate='policyDetails.agent_ID') 
+                      span.pol-property {{agent.agentId}}
+                    .col-50
+                      span.pol-value(translate='policyDetails.contact_detail')
+                      span.pol-property {{agent.mobileNo}}
+          
+
+
+  ion-footer-bar.bar-stable
+    .row
+      .col-10.no-padding
+      .col-90
+        .row
+          .clock.col-25(ng-repeat='transaction in transactions | limitTo: viewData.filterLength', ng-click="goTo('{{transaction.state}}')", ng-if='transaction.ngIf')
+            .row.transaction-item
+              .col-25
+                img.transaction-icon(ng-src='{{transaction.icon}}')
+              .col-75
+                span(translate='{{transaction.translate}}')
+
+                  
+        .row.show-more(ng-click='showFooter()', ng-if='transactions.length>4')
+          h5(ng-cloak, ng-show='viewData.showMore') show more
+          h5(ng-cloak, ng-hide='viewData.showMore') show less

@@ -1,0 +1,21 @@
+.row.has-border-padding.margin-bottom-large
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.reinstatement.giwl.policy_owner_name')
+        .pol-property {{data.clientDetails.policyOwnerName || 'N/A'}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.reinstatement.giwl.identification_no')
+        .pol-property {{data.clientDetails.idNo || 'N/A'}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.reinstatement.giwl.mobile_no')
+        .pol-property {{data.clientDetails.mobileNo || 'N/A'}}
+  .col-25.padding-right-medium
+    .row
+      .col
+        .pol-value(translate='transactions.reinstatement.giwl.email')
+        .pol-property {{data.clientDetails.email || 'N/A'}}

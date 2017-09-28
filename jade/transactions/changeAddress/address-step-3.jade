@@ -1,0 +1,40 @@
+#step3.ng-enter(ng-if='steps===3')
+  //- .center.margin-bottom-xl
+  //-   h2(translate='transactions.changeAddress.step3.edit')
+
+  //- contact details
+  .row
+    .col-90.center-block
+      h3(translate='transactions.changeAddress.step3.details')
+
+      include review-address-info
+      
+  //- selected policies in pagination
+
+  include verification-step1
+  include verification-step2
+  include verification-step3
+
+    //- verification
+  .full-bleed.margin-bottom-large(ng-if='viewData.digitalSigned')
+    .row
+      .col-80.center-block
+        .form-container      
+          span.pol-value {{'transactions.dc.step3.enter_vcode_title' | translate}} {{viewData.otpViewNumber || data.policyOwnerInfo.newMobile | phonemask}}
+          span.pol-value(translate='transactions.dc.step3.enter_vcode_title2')
+            
+          //- form.verification-block(name='step3Form')       
+          .verification-block
+            label.item.item-input.margin-bottom-small.margin-top-small
+              input.center-block(type='tel', ng-model='viewData.verificationCode' placeholder="Enter verification code", translate='transactions.dc.step3.resend_code', required, minlength='6', maxlength='6')
+            
+            button.button.button-calm.button-wide.button-major(ng-click='requestOTP()', translate='transactions.dc.step3.resend_code')
+
+            .checkbox-display-with-terms
+              div.agree-checkbox.margin-top-medium.margin-bottom-medium
+                li.item.item-checkbox
+                  label.checkbox
+                    input(type='checkbox', name='tnc', ng-model='tncChecked', required)
+                  span {{'transactions.changeAddress.tc.read_tnc1' | translate}}&nbsp;
+                  span.inline-link(translate='transactions.changeAddress.tc.read_tnc2', ng-click='changeAddressTnC()') 
+

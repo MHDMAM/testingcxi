@@ -1,0 +1,44 @@
+#step2.ng-enter(ng-if='steps===2')
+  .center.margin-bottom-xl
+    h2(translate='transactions.cc.page4_title')
+
+  .full-bleed.status-message.margin-bottom-medium
+    div.status-text-block.margin-bottom-medium
+      span.status-success(ng-if='viewData.success === true') {{"transactions.cc.submit_success" | translate}}
+      span.status-fail(ng-if='viewData.success === false') {{"transactions.cc.submit_failed" | translate}}
+    span.pol-value(ng-if='viewData.success === true', translate='transactions.cc.confirmation_email_sent')
+      //- span.status-fail(ng-if='data.success === false') {{data.success ? 'Successfully Submitted' : 'Failed'}}
+    
+
+  .row
+    .col-90.center-block.has-border-padding.margin-bottom-medium
+      h3(translate='transactions.cc.new_payment')
+      include creditCardDetails
+
+  .row
+    .col-90.center-block
+      h3(translate='transactions.cc.apply_following')
+      //- .row
+      //-   .clock.col-50(ng-repeat='item in viewData.selectedPolicies track by $index')
+      //-     .item.item-checkbox
+      //-       span.pol-property {{item.planName}}
+      //-       span.pol-value {{"transactions.cc.policy_no" | translate}} {{item.policyNo}}
+      //-       span.pol-value {{"transactions.cc.insured_name" | translate}} {{item.insuredName}}
+      ion-slide-box.slider-card
+        ion-slide(ng-repeat='group in viewData.selectedPolicies2')
+          .slide-container
+            .row 
+              ul.bullet-list
+                li(ng-repeat='item in group') 
+                   span.font-bold {{item.planName}}, &nbsp;
+                   span {{item.policyNo}}, &nbsp; {{item.insuredName}}
+
+
+  //- email confirmation
+  .center
+    //- span.pol-value(translate='transactions.cc.confirmation_email_sent')
+    //- span.pol-value(ng-show='data.creditCardInfo.email') {{"transactions.cc.email_address" | translate}} {{data.creditCardInfo.email}}
+    
+    //- nav buttons
+    button.button.button-major.button-wide.margin-top-large(ng-click='close()', translate='transactions.cc.back_to_dashboard')
+

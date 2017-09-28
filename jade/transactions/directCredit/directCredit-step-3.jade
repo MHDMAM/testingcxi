@@ -1,0 +1,53 @@
+#step3(ng-if='steps===3')
+  .center.margin-bottom-xl
+    h2(translate='transactions.dc.step3.title')
+
+  include top-row
+  //- selected policies in pagination
+  .row
+    .col-90.center-block
+      h3(translate='transactions.dc.step3.form_title')
+      ion-slide-box.slider-card(on-slide-changed='slideHasChanged($index)')
+        ion-slide(ng-repeat='group in viewData.selectedPolicies2')
+          .slide-container
+            .row
+              ul.bullet-list
+                li(ng-repeat='item in group') 
+                  span.font-bold {{item.planName}}, &nbsp;
+                  span {{item.policyNo}}, &nbsp; {{item.insuredName}}
+
+  //- verification code
+  .full-bleed.margin-bottom-large
+    .row
+      .col-80.center-block
+        .form-container      
+          span.pol-value {{'transactions.dc.step3.enter_vcode_title' | translate}} {{viewData.userInfo.mobileNo | phonemask}}
+          span.pol-value(translate='transactions.dc.step3.enter_vcode_title2')
+
+          form.verification-block(name='ccVerificationCodeForm')       
+            label.item.item-input.margin-bottom-small.margin-top-small
+              input.center-block(type='number', ng-model='viewData.verificationCode' placeholder="Enter verification code", translate='transactions.dc.step3.resend_code', required, minlength='6', maxlength='6')
+            
+            button.button.button-calm.button-wide.button-major(ng-click='requestOTP()', translate='transactions.dc.step3.resend_code')
+
+
+          //- tnc check
+          div.margin-bottom-xl.margin-top-medium
+
+            form.checkbox-display-with-terms
+              div.agree-checkbox.margin-top-medium
+                li.item.item-checkbox
+                  label.checkbox
+                    input(type='checkbox', ng-model='viewData.readTnc', required)
+                  span {{'transactions.dc.step3.terms_text1' | translate}}&nbsp;
+                span.inline-link(translate='transactions.dc.step3.terms_text2', ng-click='termsNconditions()') 
+                //- | &nbsp; {{'transactions.dc.step3.terms_text3' | translate}}
+
+  .row
+    .col
+      .center-buttons
+        button.button.button-calm.button-wide.button-major(ng-click='cancelDirectCredit()', translate='transactions.dc.step3.cancel')
+
+        button.button.button-major.button-wide(ng-click='submit()', translate='transactions.dc.step3.confirm', ng-disabled='!viewData.readTnc || !viewData.verificationCode')
+
+

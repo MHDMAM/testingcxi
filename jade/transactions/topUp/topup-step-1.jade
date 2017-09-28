@@ -1,0 +1,73 @@
+#step1(ng-if='steps===1')
+  .center.margin-bottom-xl
+    div(ng-switch='viewData.topUpMode')
+      h2(translate='transactions.topup.Schedule_title', ng-switch-when='0')
+      h2(translate='transactions.topup.add_hoc_title', ng-switch-when='1')
+      h2(translate='transactions.topup.title_select', ng-switch-default)
+
+  .row
+    .col-90.center-block
+      h3(translate='transactions.topup.details_title')
+      .row.has-border-padding.margin-bottom-large
+        .col-25.padding-right-medium
+          .pol-value(translate='transactions.topup.plan_name')
+          .pol-property {{data.policyInfo.planName}}
+        .col-25.padding-right-medium
+          .pol-value(translate='takaful.policy_no', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+          .pol-value(translate='transactions.topup.policy_no', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+          .pol-property {{data.policyInfo.policyNo}}
+        .col-25.padding-right-medium
+          .pol-value(translate='transactions.topup.insured_name')
+          .pol-property {{data.policyInfo.insuredName}}
+        .col-25.padding-right-medium(ng-if='viewData.topUpMode === 0')
+          .pol-value(translate='takaful.policy_due_amount', ng-if="data.policyInfo.lineOfBiz ==='LAFT'")
+          .pol-value(translate='transactions.topup.premium_amount', ng-if="data.policyInfo.lineOfBiz !=='LAFT'")
+          .pol-property RM{{data.policyInfo.premiumAmount}}
+        .col-25.padding-right-medium(ng-if='viewData.topUpMode === 1')
+          .pol-value(translate='transactions.topup.outstanding_coi')
+          .pol-property RM{{data.policyInfo.coverageDebt}}
+
+
+   .full-bleed.margin-bottom-xl
+      form(name='step1Form')
+        .col-90.center-block
+          .row
+            .col-33.padding-right-medium
+              span(translate='transactions.topup.wanna_to')
+              label.item.item-input.selectArrow
+                select.formInput(ng-model='viewData.topUpMode', ng-options='value.val as value.name for value in viewData.topUpValues', ng-change='topUpModeChange()')
+                  option(value='') Please select
+
+            .col-33.padding-right-medium
+              .row
+                .col-50.padding-right-medium
+                  span(translate='transactions.topup.premium_of')
+                  label.item.item-input.input-margin
+                    input(type='number', ng-model='data.premiumVal', ng-change='updateFund($index)', min='{{viewData.minTopUp}}' ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }", required)
+                  .subline-container
+                    span Minimum amount required is RM{{viewData.minTopUp}}.
+
+                .col-50
+                  span &nbsp;
+                  label.item.item-input.selectArrow(ng-show='viewData.topUpMode===0', ng-class="{'disabledItem': viewData.topUpMode===1 || data.policyInfo.policyStatusCode!=='SP'}")
+                    span.formInput(ng-show="viewData.topUpMode===1 || data.policyInfo.policyStatusCode!=='SP'", style='padding: 6px 0 6px') {{data.frequency.key}}
+                    select.formInput(ng-hide="viewData.topUpMode===1 || data.policyInfo.policyStatusCode!=='SP'", style='padding: 6px 0 6px' ng-model='data.frequency', ng-options='value as value.key for value in viewData.freqs')
+                      option(value='') Frequency
+
+            .col-33
+              //- select your allocation
+              span(translate='transactions.topup.select_your_allocation')
+              label.item.item-input.selectArrow
+                select.formInput(ng-model='viewData.allocationType', ng-options='value.val as value.name for value in viewData.allocationTypes', required)
+                  option(value='') Please select
+
+  .row
+    .col-90.center-block
+      div.margin-bottom-medium
+        span.padding-right-xxs
+          strong(translate='transactions.topup.notes')
+        span(translate='transactions.topup.notes_txt')
+
+
+  .row
+    button.center-block.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.topup.next', ng-disabled='step1Form.$invalid && checkTotal()')

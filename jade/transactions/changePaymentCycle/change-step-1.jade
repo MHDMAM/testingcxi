@@ -1,0 +1,116 @@
+#step1(ng-if='steps===1')
+	.center.margin-bottom-xl
+		h2(translate='transactions.changePaymentCycle.step1.edit')
+
+	.row
+		.col-90.center-block
+			h3(translate='transactions.changePaymentCycle.step1.title1')
+			.row.has-border-padding.margin-bottom-large
+				.col-50.padding-right-medium
+					.row.margin-bottom-small
+						.col
+							.pol-value(translate='transactions.changePaymentCycle.policy_name')
+							.pol-property {{data.mainPolicyInfo.planName}}
+					.row
+						.col
+							.pol-value(translate='transactions.changePaymentCycle.insured_name')
+							.pol-property {{data.mainPolicyInfo.insuredName}}
+					
+				.col-50.padding-right-medium
+					.row.margin-bottom-small
+						.col
+							.pol-value(translate='takaful.policy_no', ng-if="data.mainPolicyInfo.lineOfBiz ==='LAFT'")  
+							.pol-value(translate='transactions.changePaymentCycle.policy_no', ng-if="data.mainPolicyInfo.lineOfBiz !=='LAFT'")
+							.pol-property {{data.mainPolicyInfo.policyNo}}
+					.row
+						.col
+							.pol-value(translate='transactions.changePaymentCycle.current_payment_cycle')
+							.pol-property RM{{data.mainPolicyInfo.totalPremiumAmount}} {{data.mainPolicyInfo.freqDesc}}
+							.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{data.mainPolicyInfo.gstAmount}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+	.row
+		.col-90.center-block
+			form(name='cycleStep1Form')
+				h3(translate='transactions.changePaymentCycle.step1.title2')
+				.row
+					.col-33.padding-right-medium(ng-if='showChangeCycleOptions.toMonthly()')
+						.row
+							label.radio-button
+								input(type='radio', name='paymentFrequency' ng-model='viewData.selectedFreq', ng-value="'12'", ng-required='!viewData.selectedFreq' ) 
+								span.indicator
+								span {{'transactions.changePaymentCycle.step1.monthly' | translate}} 
+
+					.col-33.padding-right-medium(ng-if='showChangeCycleOptions.toQuarterly()')
+						.row
+							label.radio-button
+								input(type='radio', name='paymentFrequency' ng-model='viewData.selectedFreq', ng-value="'04'", ng-required='!viewData.selectedFreq' ) 
+								span.indicator
+								span {{'transactions.changePaymentCycle.step1.quaterly' | translate}}
+
+					.col-33.padding-right-medium(ng-if='showChangeCycleOptions.toSemiAnnual()')
+						.row
+							label.radio-button
+								input(type='radio', name='paymentFrequency' ng-model='viewData.selectedFreq', ng-value="'02'", ng-required='!viewData.selectedFreq' ) 
+								span.indicator
+								span {{'transactions.changePaymentCycle.step1.semi_anually' | translate}}
+
+
+					.col-33.padding-right-medium(ng-if='showChangeCycleOptions.toAnnual()')
+						.row
+							label.radio-button
+								input(type='radio', name='paymentFrequency' ng-model='viewData.selectedFreq', ng-value="'01'", ng-required='!viewData.selectedFreq' ) 
+								span.indicator
+								span {{'transactions.changePaymentCycle.step1.annually' | translate}}
+
+			.row
+				.clearfix
+			.row
+				.col
+					ion-slide-box.slider-card
+						ion-slide(ng-repeat='group in viewData.policyGroup')
+							.slide-container.no-padding
+								.row
+									.clock.col-33.margin-bottom-medium(ng-repeat='item in group')
+										.card.padding-medium.life-color
+											span.pol-property.margin-bottom-xs {{item.planName}}
+											div.margin-bottom-xs
+												span.pol-value {{'transactions.cancelAutoDebit.policy_no' | translate}} 
+												span.pol-value.font-bold {{item.policyNo}}
+
+											div.margin-bottom-xs
+												span.pol-value {{'transactions.changePaymentCycle.current_payment_cycle' | translate}}
+												div(ng-if="item.freq =='01'")
+													span.pol-value.font-bold RM{{item.totalPremiumAmount}} {{'transactions.changePaymentCycle.step1.annually' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.gstAmount | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="item.freq =='02'")
+													span.pol-value.font-bold RM{{item.totalPremiumAmount}} {{'transactions.changePaymentCycle.step1.semi_anually' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.gstAmount | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="item.freq =='04'")
+													span.pol-value.font-bold RM{{item.totalPremiumAmount}} {{'transactions.changePaymentCycle.step1.quaterly' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.gstAmount | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="item.freq =='12'")
+													span.pol-value.font-bold RM{{item.totalPremiumAmount}} {{'transactions.changePaymentCycle.step1.monthly' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.gstAmount | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+											div(ng-if='viewData.selectedFreq', style='border-top: solid 1px #dbdad4; padding-top: 12px;')
+												span.form-error-message {{'transactions.changePaymentCycle.new_payment_cycle' | translate}}
+												div(ng-if="viewData.selectedFreq == '01'")
+													span.pol-value.font-bold RM{{item.annualPremWithGST}} {{'transactions.changePaymentCycle.step1.annually' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.annualGST | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="viewData.selectedFreq == '02'")
+													span.pol-value.font-bold RM{{item.semiAnnualPremWithGST}} {{'transactions.changePaymentCycle.step1.semi_anually' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.semiAnnualGST | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="viewData.selectedFreq == '04'")
+													span.pol-value.font-bold RM{{item.quarterlyPremWithGST}} {{'transactions.changePaymentCycle.step1.quaterly' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item["quarterlyGST "] | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+												div(ng-if="viewData.selectedFreq == '12'")
+													span.pol-value.font-bold RM{{item.monthlyPremWithGST}} {{'transactions.changePaymentCycle.step1.monthly' | translate}}
+													span.pol-value {{'transactions.changePaymentCycle.gst_1' | translate}} RM{{item.monthlyGST | fix2}} {{'transactions.changePaymentCycle.gst_2' | translate}}
+
+	button.center-block.button.button-major.button-wide(ng-click='updateState(2)', translate='transactions.changePaymentCycle.next', ng-disabled='!viewData.selectedFreq')

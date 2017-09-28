@@ -1,0 +1,33 @@
+#step1(ng-if='steps===1')
+  //- main content
+  .row.fund-row-height
+    .col-90.center-block
+      .row.has-border-padding
+        .col-25
+          span.pol-value.font-bold(translate='transactions.fs.step2.fund_name')
+        .col-10
+          span.pol-value.font-bold.pull-right.text-align-right(translate='transactions.fs.step2.units_count')
+        .col-20
+          span.pol-value.font-bold.pull-right.text-align-right(translate='transactions.fs.step2.premium_allocation')
+        .col-20
+          span.pol-value.font-bold.pull-right.text-align-right(translate='transactions.fs.step2.unit_price')
+        .col-20
+          span.pol-value.font-bold.pull-right.text-align-right(translate='transactions.fs.step2.fund_value')
+      .row.topup-scroll
+        div
+          .row.has-border-padding.topup-scroll-row(ng-repeat='item in data.fromFunds')
+            .col
+              .row
+                .col-25
+                  span {{item.typeOfFund}}
+                .col-10
+                  span.pull-right.text-align-right {{item.noOfUnits | fix2}}
+                .col-20
+                  span.pull-right.text-align-right {{item.allocationPercent}}
+                .col-20
+                  span.pull-right.text-align-right {{item.unitPrice | fix2}}
+                .col-20
+                  span.pull-right.text-align-right {{item.valueOfUnits | fix2}}
+              .row
+                span(ng-show='!item.meta.switchable', style='color: #FBBF56') {{transactions.fs.step1.unable_switch_fund}}
+        

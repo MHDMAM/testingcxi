@@ -1,0 +1,40 @@
+ion-modal-view.crsUScitizenConfirmationModal.us-modal-height
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.changeAddress.crs.oldData.existing_crs_header')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='cancel()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl.margin-bottom-medium.status-message
+        span.pol-value(translate='transactions.changeAddress.crs.oldData.existing_crs_title')   
+    .row(ng-repeat= 'crs in crsData.crsClientTins.crsClientTin')
+      .col-90.center-block
+        .row.row-separator
+          .col-50
+            span.pol-value(translate='transactions.changeAddress.crs.oldData.country_of_residence', ng-if='crs.taxResCountry')
+            span.pol-property {{crs.taxResCountry | countrycode}}
+          .col-50
+            span.pol-value(translate='transactions.changeAddress.crs.oldData.tax_payer_id_no', ng-if='crs.taxIdNo')
+            span.pol-property {{crs.taxIdNo}}
+    .row
+      .col-90.center-block
+        .row.row-separator
+          .col
+            span.pol-value(translate='transactions.changeAddress.crs.oldData.decl_date', ng-if='crsData.formReceivedDate')
+            span.pol-property {{crsData.formReceivedDate | date:'mediumDate' }}
+    .row
+      .col-90.center-block
+        .row.row-separator
+          .col
+            span.pol-value(translate='transactions.changeAddress.crs.oldData.reason_notin', ng-if='crsData.crsReConfirmReason')
+            span.pol-property {{crsData.crsReConfirmReason}}
+     br
+    .row
+      .col-10.center-block
+      .col-33
+        button.button.button-calm.button-major(ng-click='edit()', translate='transactions.changeAddress.crs.oldData.existing_editbtn',ng-if='crsData.showIsCorrectBtn')
+        button.button.button-calm.button-major(ng-click='edit()', translate='transactions.changeAddress.crs.oldData.cancel', ng-if='!crsData.showIsCorrectBtn')
+      .col-10
+      .col-33
+        button.button.button-major(ng-click='correct()', translate='transactions.changeAddress.crs.oldData.existing_correctbtn', ng-if='crsData.showIsCorrectBtn')
+      .col-10

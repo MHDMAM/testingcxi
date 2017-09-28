@@ -1,0 +1,19 @@
+ion-modal-view.general-modal.cancelAutoDebitModal
+  ion-header-bar.bar-stable
+    h1.title(translate='transactions.cancelAutoDebit.modal.title')
+    .bar-stable
+      button.button.button-icon.icon.ion-close-round(ng-click='crs_fatcaCheckModal.cancel()')
+  ion-content
+    .row
+      .col-80.center-block.margin-top-xl
+        h3(translate='transactions.changeAddress.modal.crs_fatcaCheckModal')
+
+
+    .row
+      .col-10
+      .col-33
+        button.button.button-calm.button-wide.button-major(ng-click='crs_fatcaCheckModal.cancel()', translate='transactions.changeAddress.modal.no')
+      .col-10
+      .col-33
+        button.button.button-major.button-wide(ng-click='crs_fatcaCheckModal.yes()', translate='transactions.changeAddress.modal.yes')
+      .col-10
